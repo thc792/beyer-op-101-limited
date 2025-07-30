@@ -356,7 +356,7 @@ h1 {
 /* Area dello spartito VexFlow */
 #score {
     margin: 1px; margin-top: 1px; padding: 1px; border: 1px solid #C3B091;
-    min-height: 320px; max-height: 450px; background-color: #FAF0E6;
+    min-height: 320px; max-height: 850px; background-color: #FAF0E6;
     text-align: center;
     border-radius: 8px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     overflow-x: auto; overflow-y: auto; display: block; position: relative;
