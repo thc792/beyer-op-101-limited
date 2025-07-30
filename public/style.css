@@ -1,0 +1,430 @@
+/**
+ * style.css
+ * Stili per Piano IA revisited bayer op 101 - Tema Beige Rilassante con Accenti Blu
+ * Copyright (c) 2023-2024 Lorenzetti Giuseppe
+ * Tutti i diritti riservati.
+ */
+
+/* Reset base e font globale */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    margin: 0;
+    background-color: #F0EAD6; /* Beige Classico per lo sfondo corpo */
+    color: #5D4037; /* Marrone Scuro per testo principale, buon contrasto su beige */
+    font-size: 16px;
+}
+
+/* Header dell'applicazione */
+.app-header {
+    background-color: #E6DDC4; /* Beige leggermente più scuro o un tono caldo per l'header */
+    padding: 40px 20px 50px 20px;
+    text-align: center;
+    position: relative;
+    min-height: 180px;
+    overflow: hidden;
+    border-bottom: 3px solid #D2B48C; /* Tan/Beige Scuro per bordo */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Note Svolazzanti */
+.floating-note {
+    position: absolute;
+    font-size: 28px;
+    color: #da2518; /* Marrone medio per le note, che risalta su beige chiaro */
+    opacity: 0.6; /* Leggermente meno invadenti */
+    user-select: none;
+    animation: float 12s ease-in-out infinite alternate;
+    text-shadow:
+        0 0 3px rgba(210, 180, 140, 0.5); /* Ombra tenue tan */
+}
+.floating-note.note-1 { top: 15%; left: 10%; animation-delay: 0s; font-size: 30px; transform: rotate(-10deg); }
+.floating-note.note-2 { top: 30%; left: 85%; animation-delay: -2.5s; font-size: 26px; transform: rotate(15deg); }
+.floating-note.note-3 { top: 5%; left: 35%; animation-delay: -5s; font-size: 32px; transform: rotate(5deg); }
+.floating-note.note-5 { top: 40%; left: 20%; animation-delay: -3s; font-size: 28px; transform: rotate(20deg); }
+.floating-note.note-6 { top: 10%; left: 70%; animation-delay: -1.5s; font-size: 24px; transform: rotate(-15deg); }
+.floating-note.note-7 { top: 50%; left: 50%; animation-delay: -6s; font-size: 30px; transform: rotate(10deg); }
+.floating-note.note-8 { top: 25%; left: 5%; animation-delay: -8s; font-size: 28px; transform: rotate(-5deg); }
+.floating-note.note-9 { top: 5%; left: 90%; animation-delay: -10s; font-size: 26px; transform: rotate(25deg); }
+
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px) rotate(-5deg); opacity: 0.4; }
+    25% { transform: translateY(-10px) translateX(5px) rotate(0deg); opacity: 0.6; }
+    50% { transform: translateY(-5px) translateX(-5px) rotate(6deg); opacity: 0.5; }
+    75% { transform: translateY(5px) translateX(5px) rotate(-3deg); opacity: 0.6; }
+    100% { transform: translateY(0px) translateX(0px) rotate(-5deg); opacity: 0.4; }
+}
+
+/* Titolo principale */
+h1 {
+    color: #4A3B31; /* Marrone molto scuro per il titolo */
+    margin: 0 auto;
+    font-weight: bold;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.7); /* Ombra chiara per staccare */
+    border: 2px solid #C3B091; /* Khaki/Beige per bordo */
+    padding: 12px 25px;
+    border-radius: 10px;
+    display: inline-block;
+    background-color: rgba(245, 245, 220, 0.6); /* Sfondo Beige semi-trasparente */
+    box-shadow: 0 0 10px rgba(195, 176, 145, 0.4); /* Ombra Khaki/Beige */
+    position: relative;
+    z-index: 10;
+}
+
+/* Contenitori per controlli */
+.controls {
+    margin: 20px;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    background-color: #E6DDC4; /* Beige chiaro per area controlli */
+    border: 1px solid #D2B48C; /* Tan per bordo */
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.controls label,
+.controls select,
+.controls .scroll-speed-control {
+    margin: 5px 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    vertical-align: middle;
+    font-size: 0.95em;
+    color: #5D4037; /* Testo marrone scuro */
+}
+.controls select {
+    background-color: #F5F5DC; /* Beige per select */
+    border: 1px solid #C3B091; 
+    color: #5D4037; 
+}
+.controls select:focus {
+    outline: 2px solid #4A90E2; /* Blu per focus */
+    border-color: #4A90E2;
+}
+
+
+.scroll-speed-control {
+    display: inline-block;
+    background-color: #F5F5DC; /* Beige */
+    border: 1px solid #C3B091; 
+    border-radius: 4px;
+    padding: 5px 10px; 
+}
+.scroll-speed-control label { margin-right: 10px; font-weight: normal; padding: 0; border: none; background-color: transparent; }
+.scroll-speed-control input[type="range"] { vertical-align: middle; margin: 0 5px; cursor: pointer; accent-color: #007AFF; } /* Accento blu per slider */
+.scroll-speed-control span { font-weight: bold; min-width: 20px; text-align: center; color: #5D4037; }
+
+/* === METRONOME CONTROLS === */
+.metronome-controls {
+    margin-top: 15px; 
+    padding: 10px 15px;
+    background-color: #F5F5DC; /* Beige */
+    border: 1px solid #C3B091; 
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; 
+}
+.metronome-controls label,
+.metronome-controls input[type="number"],
+.metronome-controls input[type="checkbox"] {
+    vertical-align: middle; 
+    color: #5D4037; 
+}
+.metronome-controls label { padding: 0; font-size: 0.95em; }
+.metronome-controls input[type="number"] {
+    width: 70px; 
+    padding: 8px;
+    background-color: #FFF8E1; /* Crema chiaro */
+    border: 1px solid #D2B48C; 
+    color: #5D4037;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.95em;
+}
+.metronome-controls input[type="number"]:focus {
+    outline: 2px solid #4A90E2; /* Blu per focus */
+    border-color: #4A90E2;
+}
+
+#metronome-toggle-button {
+    padding: 8px 15px; font-size: 0.95em; border-radius: 5px; cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    background-color: #4A90E2; /* Blu Assistente */
+    color: white; 
+    border: 1px solid #357ABD; 
+    font-weight: 500;
+}
+#metronome-toggle-button:hover:not(:disabled) { background-color: #357ABD; border-color: #2A6496; transform: translateY(-1px); }
+#metronome-toggle-button.metronome-active { background-color: #D32F2F; border-color: #B71C1C; } /* Rosso per stop/attivo */
+#metronome-toggle-button.metronome-active:hover:not(:disabled) { background-color: #B71C1C; border-color: #921616; }
+#metronome-toggle-button:disabled { background-color: #BDBDBD; border-color: #9E9E9E; color: #757575; cursor: not-allowed; transform: translateY(0); }
+
+#metronome-visual-indicator {
+    display: inline-block; width: 20px; height: 20px; border-radius: 50%;
+    background-color: #C3B091; /* Khaki/Beige per indicatore spento */
+    border: 1px solid #A68D7A; 
+    transition: background-color 0.05s ease-out, box-shadow 0.1s ease-out;
+}
+.metronome-indicator-on { background-color: #4A90E2 !important; box-shadow: 0 0 8px #4A90E2, 0 0 12px rgba(74, 144, 226, 0.6); } /* Blu brillante per acceso */
+.metronome-controls .metronome-auto-start-group { display: flex; align-items: center; gap: 5px; }
+.metronome-controls input[type="checkbox"] { width: 16px; height: 16px; accent-color: #007AFF; } /* Checkbox blu */
+.metronome-controls label[for="metronome-auto-start"] { font-size: 0.9em; font-weight: normal; }
+
+/* === AREA DI STATO === */
+.status-area {
+    margin: 10px 20px 10px 20px;
+    padding: 15px;
+    background-color: #E6DDC4; /* Beige chiaro per area status */
+    border: 1px solid #D2B48C; 
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    display: flex; 
+    justify-content: space-between;
+    gap: 15px; 
+    flex-wrap: wrap; 
+}
+.status-column {
+    flex: 1; 
+    padding: 12px;
+    border: 1px solid #D7CCC8;
+    border-radius: 6px;
+    min-width: 200px; 
+    background-color: #FAF0E6; /* Linen/Beige molto chiaro per sfondo colonne */
+    display: flex; 
+    flex-direction: column; 
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.03);
+}
+.status-column h4 {
+    color: #4A3B31;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.05em;
+    font-weight: 600;
+    border-bottom: 1px solid #E6DDC4;
+    padding-bottom: 6px;
+}
+.status-area p { 
+    margin: 6px 0;
+    text-align: left; 
+    font-size: 0.9em; 
+    color: #5D4037; 
+}
+.status-area span { 
+    font-weight: bold;
+    color: #007AFF; /* Blu per testo span evidenziato */
+}
+
+.errors-list {
+    max-height: 120px;
+    overflow-y: auto;
+    padding: 8px;
+    border: 1px solid #D7CCC8; 
+    border-radius: 4px;
+    font-size: 0.85em;
+    flex-grow: 1; 
+    background-color: #fff;
+}
+.errors-list p { font-style: italic; color: #795548; text-align: center; }
+.errors-list ul { list-style-type: none; padding-left: 0; }
+.errors-list li { padding: 4px 2px; border-bottom: 1px dotted #E6DDC4; }
+.errors-list li:last-child { border-bottom: none; }
+.errors-list strong { color: #4A3B31; }
+
+
+/* === STILI FEEDBACK AI === */
+#ai-feedback-content {
+    max-height: 100px; 
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #D7CCC8; 
+    border-radius: 4px;
+    font-size: 0.85em; 
+    line-height: 1.5;
+    background-color: #fff;
+    white-space: pre-wrap; 
+    margin-top: 5px; 
+    margin-bottom: 12px; 
+    color: #5D4037; 
+    flex-grow: 1; 
+}
+#ai-feedback-content p { 
+    font-style: normal; 
+    color: #5D4037; 
+    margin: 0; 
+    padding: 2px 0; 
+}
+
+/* === INIZIO MODIFICA: Stile per il messaggio del timer di cooldown === */
+.cooldown-timer {
+    font-size: 0.9em;
+    color: #888; /* Un grigio neutro per non essere troppo invadente */
+    margin-top: 8px;
+    font-style: italic;
+    height: 1.2em; /* Dà un'altezza fissa per non far "saltare" l'interfaccia quando appare/scompare */
+    text-align: center; /* Centra il testo del timer */
+}
+/* === FINE MODIFICA === */
+
+
+/* Pulsanti comuni */
+.common-button-style {
+    margin: 5px 10px; padding: 10px 20px; font-size: 1.1em; border-radius: 6px;
+    cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease; 
+    min-width: 100px;
+    font-weight: 500;
+    border: none;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.common-button-style:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.common-button-style:active:not(:disabled) {
+    transform: translateY(0px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.common-button-style:disabled { 
+    background-color: #BDBDBD !important;
+    color: #757575 !important; 
+    cursor: not-allowed; 
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Contenitore dei pulsanti di controllo */
+.control-buttons { margin: 10px 20px 20px 20px; text-align: center; }
+
+/* Pulsanti specifici con il "mio" colore (Blu) */
+#start-button { background-color: #28A745; }
+#start-button:hover:not(:disabled) { background-color: #218838; }
+
+#stop-button { background-color: #DC3545; }
+#stop-button:hover:not(:disabled) { background-color: #C82333; }
+
+#pause-button { background-color: #FFC107; color: #212529; }
+#pause-button:hover:not(:disabled) { background-color: #E0A800; }
+
+#theory-button,
+#get-ai-feedback-button { 
+    background-color: #007AFF; 
+}
+#theory-button:hover:not(:disabled),
+#get-ai-feedback-button:hover:not(:disabled) { 
+    background-color: #005ECB; 
+}
+
+/* Applicazione manuale degli stili comuni se 'composes' non è supportato direttamente */
+.control-buttons button, #get-ai-feedback-button {
+    margin: 5px 10px; padding: 10px 20px; font-size: 1.1em; border-radius: 6px;
+    cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease; 
+    min-width: 100px;
+    font-weight: 500;
+    border: none;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.control-buttons button:hover:not(:disabled), #get-ai-feedback-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+.control-buttons button:active:not(:disabled), #get-ai-feedback-button:active:not(:disabled) {
+    transform: translateY(0px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.control-buttons button:disabled, #get-ai-feedback-button:disabled { 
+    background-color: #BDBDBD !important;
+    color: #757575 !important; 
+    cursor: not-allowed; 
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+
+/* Area dello spartito VexFlow */
+#score {
+    margin: 1px; margin-top: 1px; padding: 1px; border: 1px solid #C3B091;
+    min-height: 320px; max-height: 450px; background-color: #FAF0E6;
+    text-align: center;
+    border-radius: 8px; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; overflow-y: auto; display: block; position: relative;
+    background-image: repeating-linear-gradient(90deg,transparent,transparent 79px,#E6DDC4 79px,#E6DDC4 80px);
+}
+#score svg { display: inline-block; background-color: transparent; position: relative; z-index: 1; }
+.vf-annotation text { fill: #5D4037; font-size: 0.9em; font-weight: bold; }
+
+
+/* Media Query per schermi più piccoli */
+@media (max-width: 992px) {
+    .status-column {
+        min-width: calc(50% - 15px); 
+    }
+    .ai-feedback-column { 
+        min-width: calc(100% - 15px); 
+        order: 1; 
+    }
+}
+
+@media (max-width: 768px) {
+    body { font-size: 15px; }
+    .app-header { padding: 25px 15px 35px 15px; min-height: 160px; }
+    .floating-note { font-size: 24px; opacity: 0.5;}
+    h1 { font-size: 2em; padding: 10px 20px; }
+    
+    .controls, .status-area, .control-buttons, #score { 
+        padding: 12px; margin-left: 12px; margin-right: 12px;
+    }
+    
+    .status-area {
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+    .status-column, .ai-feedback-column {
+        min-width: unset; 
+        margin-bottom: 12px;
+        border-left: 1px solid #D7CCC8; 
+        padding-left: 12px; 
+        order: 0; 
+    }
+    .status-column:last-child { margin-bottom: 0; }
+    .errors-list, #ai-feedback-content { max-height: 110px; }
+    #score { min-height: 300px; padding: 15px; }
+    .control-buttons button, #get-ai-feedback-button { min-width: 90px; padding: 9px 18px; font-size: 1.05em; }
+    .metronome-controls { padding: 8px; gap: 8px; }
+    .metronome-controls input[type="number"] { width: 65px; padding: 7px; }
+    #metronome-toggle-button { padding: 7px 14px; font-size: 0.9em; }
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .app-header { padding: 20px 10px 30px 10px; min-height: 140px; }
+    h1 { font-size: 1.7em; }
+    
+    .controls { display: flex; flex-direction: column; align-items: stretch; }
+    .controls label, .controls select, .controls .scroll-speed-control, .metronome-controls {
+        width: auto; max-width: 96%; margin: 6px auto; 
+    }
+    
+    .status-column { width: 95%; margin-left: auto; margin-right: auto; }
+    .status-column p, .status-column h4 { text-align: center; }
+    .status-area span { text-align: center; display: block; margin-left: 0; margin-top: 4px; }
+
+    .control-buttons { display: flex; flex-direction: column; align-items: stretch; }
+    .control-buttons button, #get-ai-feedback-button { width: 90%; margin: 6px auto; padding: 10px 15px; font-size: 1em;}
+
+    .metronome-controls { flex-direction: column; align-items: stretch; gap: 8px; }
+    .metronome-controls > * { margin-left: auto; margin-right: auto; text-align: center; }
+    .metronome-controls input[type="number"], #metronome-toggle-button { width: 85%; max-width: 220px; }
+}

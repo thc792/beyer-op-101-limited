@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# File di configurazione sensibili (anche se ora usi le var d'ambiente di Vercel per la chiave API)
+.env
+
+# VS Code (opzionale, ma spesso ignorato)
+.vscode/
+
+# File di sistema operativo
+.DS_Store
+Thumbs.db
