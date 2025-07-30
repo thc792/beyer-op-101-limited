@@ -800,31 +800,50 @@ async function fetchAIFeedback(exerciseDef, stats) {
     const dataToSendToBackend = { exerciseDefinition: exerciseDef, exerciseStats: stats };
 
     try {
-        const response = await fetch(AI_BACKEND_ENDPOINT, {
-            method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(dataToSendToBackend)
-        });
-        const responseData = await response.json();
-        
-        if (!response.ok) { 
-            throw new Error(responseData.error || `Errore dal backend: ${response.status}`); 
-        }
-
-        // Se la chiamata va a buon fine, SALVIAMO IL TIMESTAMP!
-        localStorage.setItem(AI_TIMESTAMP_KEY, new Date().getTime());
-        
-        const aiTextResponse = responseData.aiFeedbackText || "Nessuna risposta valida dall'AI.";
-        aiFeedbackContentDiv.innerHTML = `<p>${aiTextResponse.replace(/\n/g, '<br>')}</p>`;
-
-        if (aiTextResponse && aiTextResponse !== "Nessuna risposta valida dall'AI." && !aiTextResponse.startsWith("L'AI non ha fornito") && !aiTextResponse.startsWith("Richiesta bloccata")) {
-            speakText(aiTextResponse);
-        }
-
-    } catch (error) {
-        console.error('Errore fetch AI:', error);
-        aiFeedbackContentDiv.innerHTML = `<p style="color: red;">Impossibile ottenere feedback AI: ${error.message}</p>`;
-    } finally { 
-        updateAIButtonState();
+    const response = await fetch(AI_BACKEND_ENDPOINT, {
+        method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(dataToSendToBackend)
+    });
+    const responseData = await response.json();
+    
+    if (!response.ok) { 
+        throw new Error(responseData.error || `Errore dal backend: ${response.status}`); 
     }
+
+    let rawText = responseData.aiFeedbackText || "Nessuna risposta valida dall'AI.";
+
+    // === INIZIO LOGICA DI PULIZIA ===
+    // Rimuovi caratteri di formattazione e prefissi numerici
+    let cleanedText = rawText
+        .replace(/\*\*/g, '')      // Rimuove ** (grassetto)
+        .replace(/\*/g, '')       // Rimuove * (corsivo/elenchi)
+        .replace(/#/g, '')        // Rimuove # (titoli)
+        .replace(/^\s*\d+\.\s*/gm, ''); // Rimuove "1. ", "2. " ecc. all'inizio delle righe
+
+    // Rimuovi eventuali etichette di istruzione residue (case-insensitive)
+    cleanedText = cleanedText
+        .replace(/VERDETTO SINTETICO:?/i, '')
+        .replace(/CONSIGLIO PRATICO:?/i, '')
+        .replace(/INCORAGGIAMENTO FINALE:?/i, '')
+        .trim(); // Rimuove spazi vuoti all'inizio e alla fine
+    // === FINE LOGICA DI PULIZIA ===
+
+    // Se la chiamata va a buon fine, SALVIAMO IL TIMESTAMP!
+    localStorage.setItem(AI_TIMESTAMP_KEY, new Date().getTime());
+    
+    // Mostra il testo pulito e formattato nell'HTML
+    aiFeedbackContentDiv.innerHTML = `<p>${cleanedText.replace(/\n/g, '<br>')}</p>`;
+
+    // Passa il testo PULITO alla sintesi vocale
+    if (cleanedText && cleanedText !== "Nessuna risposta valida dall'AI." && !cleanedText.startsWith("L'AI non ha fornito") && !cleanedText.startsWith("Richiesta bloccata")) {
+        speakText(cleanedText);
+    }
+
+} catch (error) {
+    console.error('Errore fetch AI:', error);
+    aiFeedbackContentDiv.innerHTML = `<p style="color: red;">Impossibile ottenere feedback AI: ${error.message}</p>`;
+} finally { 
+    updateAIButtonState();
+}
     // === FINE MODIFICA 4 ===
 }
 
