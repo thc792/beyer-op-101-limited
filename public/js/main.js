@@ -112,7 +112,23 @@ const THEORY_PAGE_URL = "https://www.pianohitech.com/teoria-blues-esterna";
 function updateAIButtonState() {
     if (!getAIFeedbackButton || !aiCooldownTimerSpan) return;
 
-    // Pulisci sempre qualsiasi timer precedente prima di iniziare un nuovo controllo
+    // === INIZIO MODIFICA "SBLOCCO ADMIN" ===
+    const urlParams = new URLSearchParams(window.location.search);
+    const unlockCode = "supersegreto"; // Puoi cambiare questa password!
+    const isAdminMode = urlParams.get('unlock') === unlockCode;
+
+    if (isAdminMode) {
+        console.log("Modalità Admin ATTIVATA: cooldown disabilitato.");
+        getAIFeedbackButton.style.display = 'block'; // Assicurati che sia visibile
+        getAIFeedbackButton.disabled = false;
+        aiCooldownTimerSpan.textContent = 'Modalità Admin Attiva'; // Messaggio per te
+        aiFeedbackContentDiv.innerHTML = '<p>Premi "Analizza con AI" per un feedback.</p>';
+        if (aiCountdownInterval) clearInterval(aiCountdownInterval);
+        return; // Esce dalla funzione, ignorando tutta la logica del timer
+    }
+    // === FINE MODIFICA "SBLOCCO ADMIN" ===
+
+    // Il resto della funzione rimane ESATTAMENTE UGUALE A PRIMA...
     if (aiCountdownInterval) clearInterval(aiCountdownInterval);
     
     const lastClickTime = localStorage.getItem(AI_TIMESTAMP_KEY);
@@ -123,11 +139,9 @@ function updateAIButtonState() {
         let timeLeftInMs = AI_COOLDOWN_MS - timePassed;
 
         if (timeLeftInMs > 0) {
-            // L'utente deve ancora attendere
             getAIFeedbackButton.disabled = true;
             aiFeedbackContentDiv.innerHTML = '<p>La funzione di analisi AI è in cooldown.</p>';
 
-            // Funzione per aggiornare il testo del timer
             const updateTimerText = () => {
                 const minutesLeft = Math.floor((timeLeftInMs / 1000 / 60) % 60);
                 const secondsLeft = Math.floor((timeLeftInMs / 1000) % 60);
@@ -135,32 +149,30 @@ function updateAIButtonState() {
                 aiCooldownTimerSpan.textContent = `Prossima analisi disponibile tra: ${minutesLeft}:${displaySeconds}`;
             };
 
-            updateTimerText(); // Chiamala subito per mostrare il tempo rimanente senza ritardo
+            updateTimerText();
 
-            // Avvia un nuovo timer che si aggiorna ogni secondo
             aiCountdownInterval = setInterval(() => {
                 timeLeftInMs -= 1000;
                 if (timeLeftInMs <= 0) {
                     clearInterval(aiCountdownInterval);
-                    updateAIButtonState(); // Richiama la funzione per ripristinare lo stato normale
+                    updateAIButtonState();
                 } else {
                     updateTimerText();
                 }
             }, 1000);
 
         } else {
-            // Il tempo è passato, l'utente può fare una nuova richiesta
             getAIFeedbackButton.disabled = false;
             aiCooldownTimerSpan.textContent = '';
             aiFeedbackContentDiv.innerHTML = '<p>Premi "Analizza con AI" per un feedback.</p>';
         }
     } else {
-        // Nessun timestamp salvato, l'utente può fare una richiesta
         getAIFeedbackButton.disabled = false;
         aiCooldownTimerSpan.textContent = '';
         aiFeedbackContentDiv.innerHTML = '<p>Premi "Analizza con AI" per un feedback.</p>';
     }
 }
+
 // === FINE MODIFICA 2 ===
 
 // --- Funzioni Helper ---
