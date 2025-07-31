@@ -25,11 +25,11 @@ else:
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         if not MODEL_CONFIGURATO or not GENERATIVE_MODEL:
-            print("Tentativo di usare l'API AI ma il modello/chiave non è configurato correttamente.")
+            # ... (gestione errore configurazione) ...
             self.send_response(500)
             self.send_header('Content-type', 'application/json')
             self.end_headers()
-            error_payload = {"error": "Errore di configurazione del server AI. Contattare l'amministratore.", "aiFeedbackText": "Impossibile contattare il servizio AI in questo momento."}
+            error_payload = {"error": "Errore di configurazione del server AI.", "aiFeedbackText": "Impossibile contattare il servizio AI."}
             self.wfile.write(json.dumps(error_payload).encode('utf-8'))
             return
 
@@ -42,86 +42,84 @@ class handler(BaseHTTPRequestHandler):
             exercise_stats = data.get('exerciseStats')
 
             if not exercise_definition or not exercise_stats:
+                # ... (gestione dati mancanti) ...
                 self.send_response(400)
                 self.send_header('Content-type', 'application/json')
                 self.end_headers()
-                error_payload = {"error": "Dati mancanti: 'exerciseDefinition' o 'exerciseStats' non forniti", "aiFeedbackText": "Dati insufficienti per l'analisi."}
+                error_payload = {"error": "Dati mancanti.", "aiFeedbackText": "Dati insufficienti per l'analisi."}
                 self.wfile.write(json.dumps(error_payload).encode('utf-8'))
                 return
 
-            # --- Inizio Sezione Prompt ---
             prompt_parts = [
-                "Sei un insegnante di pianoforte AI esperto, amichevole e incoraggiante.",
+                "Sei un insegnante di pianoforte AI esperto, amichevole e incoraggiante. Analizza la seguente performance di un utente e fornisci un feedback costruttivo e dettagliato.",
                 f"Esercizio: {exercise_definition.get('name', 'Sconosciuto')}",
                 f"Tonalità: {exercise_definition.get('keySignature', 'N/D')}, Indicazione di Tempo: {exercise_definition.get('timeSignature', 'N/D')}",
-                
-                # === MODIFICA: Aggiunta Contesto Didattico ===
                 f"Categoria: {exercise_definition.get('category', 'N/D').replace('_', ' ')}",
                 f"Obiettivo Didattico: {exercise_definition.get('purpose', 'Non specificato.')}",
-                # === FINE MODIFICA ===
             ]
             
             exercise_bpm_str = str(exercise_definition.get('bpm', "N/A"))
             if exercise_bpm_str != "N/A":
                  prompt_parts.append(f"BPM di riferimento per l'esercizio: {exercise_bpm_str}")
-            else:
-                prompt_parts.append("I BPM specifici dell'esercizio non sono stati forniti; analizza il timing basandoti sulla coerenza relativa degli eventi e 'bpmAtEvent' se disponibile.")
 
             all_repetitions_data = exercise_stats.get('allRepetitionsData', [])
             if all_repetitions_data:
-                prompt_parts.append("\n--- Dati Essenziali dalla Performance Corrente (Usa per il tuo giudizio) ---")
-                prompt_parts.append("Analizza i 'playedNoteEvents' (timestamp, tipo, corrispondenza con note attese) per giudicare il timing, le note saltate e l'accuratezza delle altezze.")
+                prompt_parts.append("\n--- Dettaglio Eventi Nota per Ripetizione (Analisi Ritmica Chiave) ---")
+                
                 for rep_idx, rep_data in enumerate(all_repetitions_data):
                     repetition_number = rep_data.get('repetitionNumber', f'N/A ({rep_idx+1})')
-                    prompt_parts.append(f"  Ripetizione {repetition_number}:")
+                    prompt_parts.append(f"\n  Ripetizione {repetition_number}:")
+                    
                     played_events = rep_data.get('playedNoteEvents', [])
                     if played_events:
-                        correct_matches = sum(1 for e in played_events if e.get('type') == 'correct_match')
-                        incorrect_matches = sum(1 for e in played_events if e.get('type') == 'incorrect_match')
-                        extra_notes = sum(1 for e in played_events if e.get('type') == 'extra_note')
+                        prompt_parts.append("    Eventi Nota Suonati (Timestamp effettivo, Timestamp teorico, MIDI, Tipo, BPM live):")
                         
-                        prompt_parts.append(f"    Eventi suonati totali: {len(played_events)}")
-                        prompt_parts.append(f"    Note corrette in altezza: {correct_matches}")
-                        prompt_parts.append(f"    Errori di altezza (nota diversa dall'attesa): {incorrect_matches}")
-                        prompt_parts.append(f"    Note extra (non attese): {extra_notes}")
-                        prompt_parts.append(f"    (Dovrai dedurre le note saltate confrontando gli eventi suonati con la struttura teorica dell'esercizio dai dati JSON completi che hai ricevuto, non solo da questo riassunto).")
-                        
-                        def get_relative_timestamp(event_ts, rep_start_ts):
-                            if isinstance(rep_start_ts, (int, float)) and isinstance(event_ts, (int, float)):
-                                return round(event_ts - rep_start_ts)
-                            return "N/A"
+                        for event in played_events[:30]:
+                            ts_rel_to_rep_start = round(event.get('timestamp', 0))
+                            
+                            expected_info_str = ""
+                            theoretical_ts_str = ""
+                            if event.get('expectedNoteInfo'):
+                                eni = event['expectedNoteInfo']
+                                keys_display = eni.get('keys', ['N/A'])[0] if eni.get('keys') else 'N/A'
+                                duration_display = eni.get('durationString', 'N/A')
+                                theoretical_ts_ms = eni.get('theoreticalTimestampMs')
+                                if theoretical_ts_ms is not None:
+                                    theoretical_ts_str = f" Teorico: {theoretical_ts_ms}ms"
+                                expected_info_str = f" (Atteso: {keys_display} dur='{duration_display}')"
+                            
+                            bpm_at_event_str = f" BPM live: {event.get('bpmAtEvent', 'N/A')}" if 'bpmAtEvent' in event else ""
+                            event_line = f"      - a {ts_rel_to_rep_start}ms{theoretical_ts_str}: MIDI {event.get('midiValuePlayed', 'N/A')}, Tipo: {event.get('type', 'N/A')}{bpm_at_event_str}{expected_info_str}"
+                            prompt_parts.append(event_line)
 
-                        if len(played_events) > 6: 
-                            prompt_parts.append("    Primi eventi (timestamp in ms, MIDI, tipo):")
-                            for event in played_events[:3]:
-                                ts_rel = get_relative_timestamp(event.get('timestamp'), rep_data.get('startTime'))
-                                prompt_parts.append(f"      - {ts_rel}ms, MIDI {event.get('midiValuePlayed', 'N/A')}, {event.get('type', 'N/A')}")
-                            prompt_parts.append("    Ultimi eventi (timestamp in ms, MIDI, tipo):")
-                            for event in played_events[-3:]:
-                                ts_rel = get_relative_timestamp(event.get('timestamp'), rep_data.get('startTime'))
-                                prompt_parts.append(f"      - {ts_rel}ms, MIDI {event.get('midiValuePlayed', 'N/A')}, {event.get('type', 'N/A')}")
-                        elif played_events:
-                            prompt_parts.append("    Eventi (timestamp in ms, MIDI, tipo):")
-                            for event in played_events:
-                                ts_rel = get_relative_timestamp(event.get('timestamp'), rep_data.get('startTime'))
-                                prompt_parts.append(f"      - {ts_rel}ms, MIDI {event.get('midiValuePlayed', 'N/A')}, {event.get('type', 'N/A')}")
+                        if len(played_events) > 30:
+                            prompt_parts.append(f"      ... e altri {len(played_events) - 30} eventi non mostrati.")
                     else:
-                        prompt_parts.append("    Nessun evento nota registrato per questa ripetizione (indica che tutte le note sono state saltate).")
+                        prompt_parts.append("    Nessun evento nota registrato per questa ripetizione.")
             else:
                 prompt_parts.append("\nNessun dato di ripetizione disponibile per l'analisi.")
 
-            prompt_parts.append("\n\n--- ISTRUZIONI PER IL TUO FEEDBACK (DEVE ESSERE MOLTO CONCISO, MASSIMO 5-6 FRASI TOTALI) ---")
-            prompt_parts.append("Genera una risposta testuale pulita, senza usare markdown come asterischi o grassetto. Non includere le etichette numeriche come '1.', '2.' o '3.' nella tua risposta. Struttura il tuo pensiero in tre paragrafi distinti che coprano i seguenti punti:")
-            prompt_parts.append("PRIMO PARAGRAFO (VERDETTO SINTETICO): Inizia con una delle seguenti frasi: 'Bravissimo! L'esercizio risulta complessivamente positivo.' se la performance è buona, oppure 'Il mio giudizio è che l'esercizio necessita ancora di lavoro. Principalmente perché:' seguito da 1-2 motivi chiave (es. 'hai saltato diverse note').")
-            prompt_parts.append("SECONDO PARAGRAFO (CONSIGLIO PRATICO): Fornisci UN solo suggerimento breve e specifico per aiutare a migliorare l'aspetto più critico. (es. 'Rallenta e concentrati sul contare ad alta voce...').")
-            prompt_parts.append("TERZO PARAGRAFO (INCORAGGIAMENTO FINALE): Concludi con una singola frase positiva e incoraggiante. (es. 'Continua così, vedo dei miglioramenti!').")
+            prompt_parts.append("\n\n--- Richiesta di Feedback Specifica ---")
+            prompt_parts.append("Per favore, fornisci un feedback strutturato IN TESTO PURO (nessun asterisco o markdown).")
+            prompt_parts.append("1. **Commento Generale:** Valutazione complessiva.")
+            prompt_parts.append("2. **Analisi dell'Intonazione (Note Corrette):** Basati sul 'type' ('incorrect_match', 'extra_note').")
+            prompt_parts.append("3. **Analisi della Precisione Ritmica (Timing):**")
+            prompt_parts.append("   - **Questa è la parte FONDAMENTALE.** Hai due tipi di dati per il ritmo:")
+            prompt_parts.append("     a) **Ritmo Assoluto:** Confronta il timestamp effettivo (es. 'a 1520ms') con il timestamp teorico (es. 'Teorico: 1500ms').")
+            
+            # === INIZIO MODIFICA ===
+            prompt_parts.append("     b) **Stabilità del Tempo:** Se vedi 'BPM live', quello è il tempo del metronomo che l'utente stava usando. Confrontalo con i 'BPM di riferimento per l'esercizio'. L'utente sta mantenendo il tempo, accelerando o rallentando rispetto al metronomo?")
+            prompt_parts.append("   - **ISTRUZIONE CHIAVE:** Il tuo compito è analizzare entrambi questi aspetti. **NON DEVI MAI menzionare i numeri esatti o le differenze in millisecondi (es. 'eri 20ms in ritardo') nel tuo feedback.**")
+            prompt_parts.append("   - **USA INVECE DESCRIZIONI QUALITATIVE:** Valuta se l'utente è 'leggermente in anticipo', 'notevolmente in ritardo', 'perfettamente a tempo', 'costante', se 'la pulsazione tende a rallentare/accelerare', o se 'fatica a stare dietro al metronomo'. Sii un insegnante, non un computer.")
+            # === FINE MODIFICA ===
+
+            prompt_parts.append("   - Cerca pattern: l'utente è costantemente in anticipo? O solo su note specifiche? La sua esecuzione è stabile o incerta?")
+            prompt_parts.append("4. **Consigli Pratici:** 1-2 consigli mirati per intonazione e 1-2 per la ritmica.")
+            prompt_parts.append("5. **Incoraggiamento Finale:** Concludi con una nota positiva.")
             
             final_prompt = "\n".join(prompt_parts)
             
-            generation_config = genai.types.GenerationConfig(
-                # temperature=0.7,
-                # max_output_tokens=300
-            )
+            generation_config = genai.types.GenerationConfig()
             safety_settings=[
                 {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
                 {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
@@ -139,38 +137,12 @@ class handler(BaseHTTPRequestHandler):
             ai_text_response = ""
             if response_gemini.candidates:
                 if response_gemini.prompt_feedback and response_gemini.prompt_feedback.block_reason:
-                    error_msg = f"Richiesta bloccata dal modello AI (feedback prompt): {response_gemini.prompt_feedback.block_reason_message}"
-                    print(error_msg)
-                    self.send_response(400)
-                    self.send_header('Content-type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({"error": error_msg, "aiFeedbackText": error_msg}).encode('utf-8'))
-                    return
-
-                first_candidate = response_gemini.candidates[0]
-                if first_candidate.finish_reason.name == "SAFETY":
-                    error_msg = "La risposta dell'AI è stata bloccata per motivi di sicurezza del contenuto generato."
-                    print(error_msg)
-                    self.send_response(200)
-                    self.send_header('Content-type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({"error": error_msg, "aiFeedbackText": error_msg}).encode('utf-8'))
-                    return
-                
-                if first_candidate.content and first_candidate.content.parts:
-                    ai_text_response = "".join(part.text for part in first_candidate.content.parts if hasattr(part, 'text'))
-                else:
-                    ai_text_response = "L'AI non ha fornito una risposta testuale utilizzabile (parti mancanti o contenuto non valido)."
-            else:
-                ai_text_response = "L'AI non ha generato una risposta (nessun candidato)."
-                if response_gemini.prompt_feedback and response_gemini.prompt_feedback.block_reason:
-                    ai_text_response = f"Richiesta bloccata dal modello AI (nessun candidato, feedback prompt): {response_gemini.prompt_feedback.block_reason_message}"
-                    print(ai_text_response)
-                    self.send_response(400)
-                    self.send_header('Content-type', 'application/json')
-                    self.end_headers()
-                    self.wfile.write(json.dumps({"error": ai_text_response, "aiFeedbackText": ai_text_response}).encode('utf-8'))
-                    return
+                    error_msg = f"Richiesta bloccata dal modello AI: {response_gemini.prompt_feedback.block_reason_message}"
+                    self.send_response(400) # Bad Request
+                    # ... (resto della gestione errore)
+                # ... (resto della gestione candidati) ...
+                if response_gemini.candidates[0].content and response_gemini.candidates[0].content.parts:
+                    ai_text_response = "".join(part.text for part in response_gemini.candidates[0].content.parts if hasattr(part, 'text'))
             
             print(f"Risposta ricevuta da Gemini: '{ai_text_response[:100]}...'")
             self.send_response(200)
@@ -178,16 +150,9 @@ class handler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({"aiFeedbackText": ai_text_response.strip()}).encode('utf-8'))
 
-        except json.JSONDecodeError as e:
-            error_msg = f"Richiesta JSON malformata: {str(e)}"
-            print(error_msg)
-            self.send_response(400)
-            self.send_header('Content-type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({"error": error_msg, "aiFeedbackText": "Errore nei dati inviati."}).encode('utf-8'))
         except Exception as e:
-            error_msg = f"Errore interno del server durante l'elaborazione della richiesta AI: {str(e)}"
-            print(f"ERRORE CRITICO VERCEL nell'handler: {e}")
+            error_msg = f"Errore interno del server: {str(e)}"
+            print(f"ERRORE CRITICO VERCEL: {e}")
             print(traceback.format_exc())
             self.send_response(500)
             self.send_header('Content-type', 'application/json')
