@@ -38,6 +38,7 @@ import {
 } from './metronome.js';
 
 // --- Costanti e Riferimenti DOM ---
+const languageSelect = document.getElementById('language-select');
 const categorySelect = document.getElementById('category-select');
 const exerciseSelect = document.getElementById('exercise-select');
 const startButton = document.getElementById('start-button');
