@@ -428,3 +428,52 @@ h1 {
     .metronome-controls > * { margin-left: auto; margin-right: auto; text-align: center; }
     .metronome-controls input[type="number"], #metronome-toggle-button { width: 85%; max-width: 220px; }
 }
+/* === INIZIO MODIFICA: Stili per la schermata di blocco === */
+.app-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); /* Sfondo scuro semi-trasparente */
+    z-index: 1000; /* Assicura che sia sopra tutto il resto */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.overlay-content {
+    background-color: #4A3B31; /* Marrone scuro */
+    padding: 40px;
+    border-radius: 10px;
+    border: 2px solid #D2B48C;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.overlay-content h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.overlay-content p {
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.countdown-timer-large {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #FFC107; /* Giallo */
+    margin: 20px 0;
+}
+
+.unlock-info {
+    margin-top: 30px;
+    font-size: 0.9em;
+    font-style: italic;
+    color: #aaa;
+}
+/* === FINE MODIFICA === */

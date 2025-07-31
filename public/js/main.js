@@ -11,10 +11,19 @@
  *
  * Data Creazione: 2023-10-26
  * Ultima Modifica: 2024-07-31
- * Versione: 1.1.0 (con cooldown AI)
+ * Versione: 1.2.0 (con cooldown AI e blocco esercizi)
  *
  * NOTE LEGALI:
- * ... (resto delle note legali) ...
+ * Questo software è fornito "così com'è", senza alcuna garanzia espressa o
+ * implicita. In nessun caso l'autore sarà ritenuto responsabile per eventuali
+ * danni derivanti dall'uso di questo software.
+ *
+ * La riproduzione, la distribuzione o la modifica non autorizzata di questo
+ * software, o di qualsiasi sua parte, è severamente vietata e può comportare
+ * sanzioni civili e penali.
+ *
+ * Questo software è proprietario e confidenziale.
+ * È concesso in licenza, non venduto.
  * -----------------------------------------------------------------------------
  */
 
@@ -44,7 +53,6 @@ const playedNoteSpan = document.getElementById('played-note');
 const scrollSpeedControl = document.getElementById('scroll-speed');
 const scrollSpeedValueSpan = document.getElementById('scroll-speed-value');
 const metronomeAutoStartCheckbox = document.getElementById('metronome-auto-start');
-
 const summaryTotalTimeSpan = document.getElementById('summary-total-time');
 const summaryTotalErrorsSpan = document.getElementById('summary-total-errors');
 const summaryAvgRepTimeSpan = document.getElementById('summary-avg-rep-time');
@@ -53,15 +61,25 @@ const summaryErrorsListDiv = document.getElementById('summary-errors-list');
 // --- Riferimenti DOM per Feedback AI ---
 let aiFeedbackContentDiv = null;
 let getAIFeedbackButton = null;
-const AI_BACKEND_ENDPOINT = '/api/get_ai_feedback'; 
+const AI_BACKEND_ENDPOINT = '/api/get_ai_feedback';
 
-// === INIZIO MODIFICA 1: Aggiunta variabili per il Cooldown AI ===
-let aiCooldownTimerSpan = null; // Il nostro nuovo elemento per il timer
-const AI_COOLDOWN_HOURS = 1; // Quante ore di attesa
+// === Variabili per Cooldown AI ===
+let aiCooldownTimerSpan = null;
+const AI_COOLDOWN_HOURS = 1;
 const AI_COOLDOWN_MS = AI_COOLDOWN_HOURS * 60 * 60 * 1000;
-const AI_TIMESTAMP_KEY = 'aiLastFeedbackTimestamp'; // Chiave per il localStorage
-let aiCountdownInterval = null; // Variabile per il nostro setInterval
-// === FINE MODIFICA 1 ===
+const AI_TIMESTAMP_KEY = 'aiLastFeedbackTimestamp';
+let aiCountdownInterval = null;
+
+// === Variabili per Blocco Esercizi ===
+const MAX_EXERCISES_BEFORE_BLOCK = 5;
+const BLOCK_DURATION_HOURS = 24;
+const BLOCK_DURATION_MS = BLOCK_DURATION_HOURS * 60 * 60 * 1000;
+const EXERCISE_COUNTER_KEY = 'exerciseCompletionCount';
+const BLOCK_TIMESTAMP_KEY = 'exerciseBlockTimestamp';
+let appBlockOverlay = null;
+let blockCountdownTimer = null;
+let blockUpdateInterval = null;
+
 
 // --- Stato Applicazione ---
 let allExercises = {};
@@ -75,7 +93,6 @@ let exerciseCompletionTimeout = null;
 // --- Stato Avanzamento Esercizio ---
 let totalNotesInExercise = 0;
 let correctNotesInExercise = 0;
-
 let totalNotesPerRepetition = 0;
 let correctNotesThisRepetition = 0;
 let currentRepetition = 1;
@@ -104,31 +121,68 @@ const SCROLL_PIXELS_PER_INTERVAL_BASE = 0.5;
 const THEORY_PAGE_URL = "https://www.pianohitech.com/teoria-blues-esterna";
 
 
-// === INIZIO MODIFICA 2: Funzione Cervello per il Cooldown del Pulsante AI ===
-/**
- * Controlla il localStorage per vedere se l'utente deve attendere prima di poter
- * richiedere un altro feedback AI. Aggiorna il pulsante e mostra un timer se necessario.
- */
+// === LOGICA DI BLOCCO PRINCIPALE ===
+function checkAndEnforceExerciseBlock() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('unlock') === "supersegreto") {
+        console.log("Modalità Admin: blocco esercizi ignorato.");
+        localStorage.removeItem(BLOCK_TIMESTAMP_KEY); 
+        if(appBlockOverlay) appBlockOverlay.style.display = 'none';
+        return;
+    }
+    
+    if (!appBlockOverlay || !blockCountdownTimer) return;
+    if (blockUpdateInterval) clearInterval(blockUpdateInterval);
+
+    const blockStartTime = localStorage.getItem(BLOCK_TIMESTAMP_KEY);
+
+    if (blockStartTime) {
+        const timePassed = new Date().getTime() - parseInt(blockStartTime, 10);
+        let timeLeft = BLOCK_DURATION_MS - timePassed;
+
+        if (timeLeft > 0) {
+            appBlockOverlay.style.display = 'flex';
+            
+            const updateTimer = () => {
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                blockCountdownTimer.textContent = `${hours}h ${minutes}m ${seconds}s`;
+                timeLeft -= 1000;
+
+                if (timeLeft < 0) {
+                    clearInterval(blockUpdateInterval);
+                    checkAndEnforceExerciseBlock();
+                }
+            };
+            updateTimer();
+            blockUpdateInterval = setInterval(updateTimer, 1000);
+        } else {
+            localStorage.removeItem(BLOCK_TIMESTAMP_KEY);
+            appBlockOverlay.style.display = 'none';
+        }
+    } else {
+        appBlockOverlay.style.display = 'none';
+    }
+}
+
+
+// === LOGICA COOLDOWN PULSANTE AI ===
 function updateAIButtonState() {
     if (!getAIFeedbackButton || !aiCooldownTimerSpan) return;
 
-    // === INIZIO MODIFICA "SBLOCCO ADMIN" ===
     const urlParams = new URLSearchParams(window.location.search);
-    const unlockCode = "supersegreto"; // Puoi cambiare questa password!
-    const isAdminMode = urlParams.get('unlock') === unlockCode;
-
-    if (isAdminMode) {
-        console.log("Modalità Admin ATTIVATA: cooldown disabilitato.");
-        getAIFeedbackButton.style.display = 'block'; // Assicurati che sia visibile
+    if (urlParams.get('unlock') === "supersegreto") {
+        console.log("Modalità Admin ATTIVATA: cooldown AI disabilitato.");
+        getAIFeedbackButton.style.display = 'block';
         getAIFeedbackButton.disabled = false;
-        aiCooldownTimerSpan.textContent = 'Modalità Admin Attiva'; // Messaggio per te
+        aiCooldownTimerSpan.textContent = 'Modalità Admin Attiva';
         aiFeedbackContentDiv.innerHTML = '<p>Premi "Analizza con AI" per un feedback.</p>';
         if (aiCountdownInterval) clearInterval(aiCountdownInterval);
-        return; // Esce dalla funzione, ignorando tutta la logica del timer
+        return;
     }
-    // === FINE MODIFICA "SBLOCCO ADMIN" ===
 
-    // Il resto della funzione rimane ESATTAMENTE UGUALE A PRIMA...
     if (aiCountdownInterval) clearInterval(aiCountdownInterval);
     
     const lastClickTime = localStorage.getItem(AI_TIMESTAMP_KEY);
@@ -141,7 +195,7 @@ function updateAIButtonState() {
         if (timeLeftInMs > 0) {
             getAIFeedbackButton.disabled = true;
             aiFeedbackContentDiv.innerHTML = '<p>La funzione di analisi AI è in cooldown.</p>';
-
+            
             const updateTimerText = () => {
                 const minutesLeft = Math.floor((timeLeftInMs / 1000 / 60) % 60);
                 const secondsLeft = Math.floor((timeLeftInMs / 1000) % 60);
@@ -150,7 +204,6 @@ function updateAIButtonState() {
             };
 
             updateTimerText();
-
             aiCountdownInterval = setInterval(() => {
                 timeLeftInMs -= 1000;
                 if (timeLeftInMs <= 0) {
@@ -173,7 +226,6 @@ function updateAIButtonState() {
     }
 }
 
-// === FINE MODIFICA 2 ===
 
 // --- Funzioni Helper ---
 const MIDI_NOTE_NAMES_ARRAY = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -188,10 +240,13 @@ function highlightPendingNotes() {
     if (!currentExerciseData) {
         return;
     }
+
     let firstPendingNoteForDisplay = null;
     let notesToMakeExpected = [];
     let minPendingTick = Infinity;
+
     const noteArrays = [currentExerciseData.notesTreble, currentExerciseData.notesBass, currentExerciseData.notes].filter(arr => arr && arr.length > 0);
+
     noteArrays.forEach(notes => {
         notes.forEach(noteObj => {
             if (noteObj && noteObj.status === 'pending' && !(noteObj.keys && noteObj.keys[0]?.toLowerCase().startsWith('r/'))) {
@@ -207,6 +262,7 @@ function highlightPendingNotes() {
             }
         });
     });
+
     if (isPlaying && !isPaused && notesToMakeExpected.length > 0) {
         notesToMakeExpected.forEach(noteObj => {
             noteObj.status = 'expected';
@@ -225,6 +281,7 @@ function highlightPendingNotes() {
                 }
             });
         });
+
         if (firstTrulyPendingAfterSelection) {
             updateInfo(getNoteDescriptionForUser(firstTrulyPendingAfterSelection));
         } else if (currentRepetition > targetRepetitions) {
@@ -237,6 +294,7 @@ function highlightPendingNotes() {
             updateInfo("Pronto per iniziare o esercizio terminato.");
         }
     }
+
     if (isPlaying && !isPaused && notesToMakeExpected.length === 0) {
         finalizeAndStoreRepetitionData();
         currentRepetition++;
@@ -253,6 +311,7 @@ function highlightPendingNotes() {
             handleExerciseCompletion();
         }
     }
+
     if ((isPlaying && !isPaused && notesToMakeExpected.length > 0) || !isPlaying) {
         if (scoreDiv && currentExerciseData) {
             const savedScroll = scoreDiv.scrollTop;
@@ -282,6 +341,7 @@ function getNoteDescriptionForUser(noteObj) {
     return "Pausa o Nota Sconosciuta";
 }
 
+// --- Logica Caricamento e Selezione Esercizi ---
 function loadExerciseData() {
     if (window.exerciseData) {
         allExercises = window.exerciseData;
@@ -353,6 +413,7 @@ function selectExercise(exerciseId, categoryKey) {
         totalNotesPerRepetition = 0;
         let hasPlayableNotes = false;
         let noteCounter = 0;
+
         ['notes', 'notesTreble', 'notesBass'].forEach(key => {
             if (currentExerciseData[key]?.length) {
                 currentExerciseData[key].forEach(noteObj => {
@@ -376,6 +437,7 @@ function selectExercise(exerciseId, categoryKey) {
         });
         totalNotesInExercise = totalNotesPerRepetition * targetRepetitions;
         correctNotesInExercise = 0;
+
         resetNoteStatesAndRepetition();
         let renderOutput = renderExercise(scoreDivId, currentExerciseData);
         if (renderOutput && renderOutput.processedNotes) {
@@ -383,6 +445,7 @@ function selectExercise(exerciseId, categoryKey) {
             currentExerciseData.notesBass = renderOutput.processedNotes.bass || currentExerciseData.notesBass || [];
             currentExerciseData.notes = renderOutput.processedNotes.single || currentExerciseData.notes || [];
         }
+
         highlightPendingNotes();
         if(scoreDiv) scoreDiv.scrollTop = 0;
         if(startButton) startButton.disabled = !midiReady || !hasPlayableNotes;
@@ -399,6 +462,7 @@ function selectExercise(exerciseId, categoryKey) {
     }
 }
 
+// --- Implementazioni di Base per Logica Esercizio ---
 function resetNoteStatesAndRepetition() {
     correctNotesThisRepetition = 0;
     if (currentExerciseData) {
@@ -437,11 +501,14 @@ function resetNoteStatesForNewRepetition() {
 function handleNoteOn(noteName, midiNote, velocity) {
     if (!isPlaying || isPaused || !currentExerciseData) return;
     if (playedNoteSpan) playedNoteSpan.textContent = `${noteName} (MIDI: ${midiNote}, Vel: ${velocity})`;
+
     const absoluteTimestamp = performance.now();
     let eventType = 'extra_note'; 
     let matchedExpectedNoteInfo = null;
     let noteMatchedAnExpectedDirectly = false;
+
     const noteCollections = [currentExerciseData.notesTreble, currentExerciseData.notesBass, currentExerciseData.notes];
+
     for (const notes of noteCollections) {
         if (notes && Array.isArray(notes)) {
             for (const noteObj of notes) {
@@ -456,9 +523,11 @@ function handleNoteOn(noteName, midiNote, velocity) {
                             startTick: noteObj.startTick,
                             durationString: noteObj.duration,
                         };
+
                         if (!noteObj.correctMidiValues.includes(midiNote)) {
                             noteObj.correctMidiValues.push(midiNote);
                         }
+
                         if (noteObj.correctMidiValues.length === noteObj.expectedMidiValues.length) {
                             noteObj.status = 'correct';
                             noteObj.isCorrect = true;
@@ -474,6 +543,7 @@ function handleNoteOn(noteName, midiNote, velocity) {
         }
         if (noteMatchedAnExpectedDirectly) break; 
     }
+
     if (!noteMatchedAnExpectedDirectly) {
         let activeExpectedNote = null;
         for (const notes of noteCollections) {
@@ -482,6 +552,7 @@ function handleNoteOn(noteName, midiNote, velocity) {
                 if (activeExpectedNote) break;
             }
         }
+
         if (activeExpectedNote) {
             eventType = 'incorrect_match';
             matchedExpectedNoteInfo = { 
@@ -502,8 +573,10 @@ function handleNoteOn(noteName, midiNote, velocity) {
             eventType = 'extra_note';
         }
     }
+
     if (currentRepetitionData && currentRepetitionData.playedNoteEvents) {
         const relativeTimestamp = absoluteTimestamp - (currentRepetitionData.startTime || absoluteTimestamp);
+
         const eventData = {
             timestamp: Math.round(relativeTimestamp),
             midiValuePlayed: midiNote,
@@ -513,14 +586,18 @@ function handleNoteOn(noteName, midiNote, velocity) {
         if (matchedExpectedNoteInfo) {
             eventData.expectedNoteInfo = matchedExpectedNoteInfo;
         }
+
         if (isMetronomeRunning) {
             eventData.bpmAtEvent = metronomeBpm;
         } else if (currentExerciseDefinition && currentExerciseDefinition.bpm) {
             eventData.bpmAtEvent = currentExerciseDefinition.bpm;
         }
+
         currentRepetitionData.playedNoteEvents.push(eventData);
     }
+
     updateSuccessRate();
+
     let allExpectedForThisMomentResolved = true;
     if (noteMatchedAnExpectedDirectly) {
         noteCollections.forEach(notes => {
@@ -535,6 +612,7 @@ function handleNoteOn(noteName, midiNote, velocity) {
     } else {
         allExpectedForThisMomentResolved = false;
     }
+
     if (allExpectedForThisMomentResolved) {
         highlightPendingNotes();
     } else {
@@ -546,21 +624,25 @@ function handleNoteOn(noteName, midiNote, velocity) {
     }
 }
 
+// --- Gestione Flusso Esercizio (Start, Stop, Pause, Resume) ---
 function startExercise() {
     if (getAIFeedbackButton) getAIFeedbackButton.style.display = 'none';
     if (aiFeedbackContentDiv) aiFeedbackContentDiv.innerHTML = '<p>Completa un esercizio per ricevere un\'analisi AI.</p>';
     if (aiCooldownTimerSpan) aiCooldownTimerSpan.textContent = '';
     if (!currentExerciseData || !midiReady || !totalNotesPerRepetition || isPlaying) { return; }
     if (exerciseCompletionTimeout) clearTimeout(exerciseCompletionTimeout);
+
     initializeNewExerciseStats();
     currentRepetition = 1;
     resetNoteStatesAndRepetition();
     initializeNewRepetitionData(currentRepetition);
+
     isPlaying = true; isPaused = false;
     if(startButton) startButton.disabled = true; if(pauseButton) { pauseButton.disabled = false; pauseButton.textContent = "Pause"; }
     if(stopButton) stopButton.disabled = false; if(categorySelect) categorySelect.disabled = true; if(exerciseSelect) exerciseSelect.disabled = true;
     if(theoryButton) theoryButton.disabled = true; updateSuccessRate(); if(playedNoteSpan) playedNoteSpan.textContent = '--';
     clearExerciseSummary();
+
     if (metronomeAutoStartCheckbox && metronomeAutoStartCheckbox.checked && !isMetronomeRunning) {
         initAudioContext(); let exerciseBeatsPerMeasure = 4;
         if (currentExerciseDefinition?.timeSignature) { const tsParts = currentExerciseDefinition.timeSignature.split('/'); if (tsParts.length === 2) { const num = parseInt(tsParts[0]); if (!isNaN(num) && num > 0) exerciseBeatsPerMeasure = num; }}
@@ -583,24 +665,43 @@ function stopExercise() {
         let totalDurationMs = exerciseStats.exerciseEndTime - exerciseStats.exerciseStartTime - (exerciseStats.totalPausedDurationMs || 0);
         exerciseStats.totalActiveTimeSeconds = parseFloat((Math.max(0, totalDurationMs) / 1000).toFixed(2));
     } else { exerciseStats.totalActiveTimeSeconds = 0; }
+
     displayExerciseSummary();
     if (exerciseCompletionTimeout) clearTimeout(exerciseCompletionTimeout);
     stopScrolling();
     if (isMetronomeRunning) stopMetronome();
     isPlaying = false; isPaused = false;
+
     if (currentExerciseData) {
         resetNoteStatesAndRepetition();
         renderExercise(scoreDivId, currentExerciseData);
         if(scoreDiv) scoreDiv.scrollTop = 0;
     } else { if(scoreDiv) scoreDiv.innerHTML = '<p>Nessun esercizio attivo.</p>'; }
+
     if(startButton) startButton.disabled = !midiReady || !currentExerciseData || !totalNotesPerRepetition;
     if(pauseButton) { pauseButton.disabled = true; pauseButton.textContent = "Pause"; }
     if(stopButton) stopButton.disabled = true; if(categorySelect) categorySelect.disabled = false;
     if(exerciseSelect) exerciseSelect.disabled = (categorySelect && categorySelect.value === ""); if(theoryButton) theoryButton.disabled = false;
     highlightPendingNotes();
     if(playedNoteSpan) playedNoteSpan.textContent = '--'; if(successRateSpan) successRateSpan.textContent = '-- %';
-    
-    // === INIZIO MODIFICA 3: Modifica della logica di visualizzazione del pulsante AI ===
+
+    // === Logica contatore e blocco ===
+    if (exerciseStats.allRepetitionsData && exerciseStats.allRepetitionsData.length > 0) {
+        let currentCount = parseInt(localStorage.getItem(EXERCISE_COUNTER_KEY) || '0', 10);
+        currentCount++;
+        
+        console.log(`Esercizi completati da ultimo reset: ${currentCount}`);
+
+        if (currentCount >= MAX_EXERCISES_BEFORE_BLOCK) {
+            console.log(`Limite di ${MAX_EXERCISES_BEFORE_BLOCK} esercizi raggiunto. Avvio blocco di 24 ore.`);
+            localStorage.setItem(BLOCK_TIMESTAMP_KEY, new Date().getTime());
+            localStorage.setItem(EXERCISE_COUNTER_KEY, '0'); // Resetta il contatore
+            checkAndEnforceExerciseBlock(); // Attiva subito la schermata di blocco
+        } else {
+            localStorage.setItem(EXERCISE_COUNTER_KEY, currentCount.toString());
+        }
+    }
+
     if (getAIFeedbackButton && aiFeedbackContentDiv) {
         if (currentExerciseDefinition && exerciseStats && Object.keys(exerciseStats).length > 0 &&
             exerciseStats.allRepetitionsData && exerciseStats.allRepetitionsData.length > 0) {
@@ -614,7 +715,6 @@ function stopExercise() {
             aiFeedbackContentDiv.innerHTML = '<p>Completa almeno una ripetizione per l\'analisi AI.</p>';
         }
     }
-    // === FINE MODIFICA 3 ===
 }
 
 function pauseExercise() {
@@ -754,15 +854,21 @@ function updateSuccessRate() {
 }
 
 function updateInfo(message) { if(expectedNoteSpan) expectedNoteSpan.textContent = message; }
+
 function clearExerciseSummary() {
-    if(summaryTotalTimeSpan) summaryTotalTimeSpan.textContent = '--'; if(summaryTotalErrorsSpan) summaryTotalErrorsSpan.textContent = '--';
-    if(summaryAvgRepTimeSpan) summaryAvgRepTimeSpan.textContent = '--'; if(summaryErrorsListDiv) summaryErrorsListDiv.innerHTML = '<p>Nessun esercizio completato.</p>';
+    if(summaryTotalTimeSpan) summaryTotalTimeSpan.textContent = '--';
+    if(summaryTotalErrorsSpan) summaryTotalErrorsSpan.textContent = '--';
+    if(summaryAvgRepTimeSpan) summaryAvgRepTimeSpan.textContent = '--';
+    if(summaryErrorsListDiv) summaryErrorsListDiv.innerHTML = '<p>Nessun esercizio completato.</p>';
 }
 
 function resetUIState() {
-    if(successRateSpan) successRateSpan.textContent = '-- %'; if(playedNoteSpan) playedNoteSpan.textContent = '--';
-    if(stopButton) stopButton.disabled = true; if(pauseButton) { pauseButton.disabled = true; pauseButton.textContent = "Pause"; }
-    if(theoryButton) theoryButton.disabled = false; if (exerciseCompletionTimeout) clearTimeout(exerciseCompletionTimeout);
+    if(successRateSpan) successRateSpan.textContent = '-- %';
+    if(playedNoteSpan) playedNoteSpan.textContent = '--';
+    if(stopButton) stopButton.disabled = true;
+    if(pauseButton) { pauseButton.disabled = true; pauseButton.textContent = "Pause"; }
+    if(theoryButton) theoryButton.disabled = false;
+    if (exerciseCompletionTimeout) clearTimeout(exerciseCompletionTimeout);
     clearExerciseSummary();
     if (getAIFeedbackButton) getAIFeedbackButton.style.display = 'none';
     if (aiFeedbackContentDiv) aiFeedbackContentDiv.innerHTML = '<p>Completa un esercizio per ricevere un\'analisi AI.</p>';
@@ -781,73 +887,45 @@ function updateMidiStatus(message, isConnected) {
             else highlightPendingNotes();
         }
     } else {
-        if(startButton) startButton.disabled = true; if(pauseButton) pauseButton.disabled = true;
-        if(stopButton) stopButton.disabled = !isPlaying; if(theoryButton) theoryButton.disabled = true;
+        if(startButton) startButton.disabled = true;
+        if(pauseButton) pauseButton.disabled = true;
+        if(stopButton) stopButton.disabled = !isPlaying;
+        if(theoryButton) theoryButton.disabled = true;
         updateInfo("Collega MIDI.");
         if (isPlaying && !isPaused) { pauseExercise(); alert("MIDI disconnesso! Esercizio in pausa."); }
     }
 }
 
-// --- Funzione AI ---
 async function fetchAIFeedback(exerciseDef, stats) {
     if (!aiFeedbackContentDiv || !getAIFeedbackButton) { return; }
-    
-    // === INIZIO MODIFICA 4: Modifica della funzione fetch AI ===
     getAIFeedbackButton.disabled = true;
     aiFeedbackContentDiv.innerHTML = '<p>Analisi AI in corso...</p>';
     if (aiCooldownTimerSpan) aiCooldownTimerSpan.textContent = '';
-
     const dataToSendToBackend = { exerciseDefinition: exerciseDef, exerciseStats: stats };
-
     try {
-    const response = await fetch(AI_BACKEND_ENDPOINT, {
-        method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(dataToSendToBackend)
-    });
-    const responseData = await response.json();
-    
-    if (!response.ok) { 
-        throw new Error(responseData.error || `Errore dal backend: ${response.status}`); 
+        const response = await fetch(AI_BACKEND_ENDPOINT, {
+            method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(dataToSendToBackend)
+        });
+        const responseData = await response.json();
+        if (!response.ok) { 
+            throw new Error(responseData.error || `Errore dal backend: ${response.status}`); 
+        }
+        let rawText = responseData.aiFeedbackText || "Nessuna risposta valida dall'AI.";
+        let cleanedText = rawText.replace(/\*\*/g, '').replace(/\*/g, '').replace(/#/g, '').replace(/^\s*\d+\.\s*/gm, '');
+        cleanedText = cleanedText.replace(/VERDETTO SINTETICO:?/i, '').replace(/CONSIGLIO PRATICO:?/i, '').replace(/INCORAGGIAMENTO FINALE:?/i, '').trim();
+        localStorage.setItem(AI_TIMESTAMP_KEY, new Date().getTime());
+        aiFeedbackContentDiv.innerHTML = `<p>${cleanedText.replace(/\n/g, '<br>')}</p>`;
+        if (cleanedText && cleanedText !== "Nessuna risposta valida dall'AI." && !cleanedText.startsWith("L'AI non ha fornito") && !cleanedText.startsWith("Richiesta bloccata")) {
+            speakText(cleanedText);
+        }
+    } catch (error) {
+        console.error('Errore fetch AI:', error);
+        aiFeedbackContentDiv.innerHTML = `<p style="color: red;">Impossibile ottenere feedback AI: ${error.message}</p>`;
+    } finally { 
+        updateAIButtonState();
     }
-
-    let rawText = responseData.aiFeedbackText || "Nessuna risposta valida dall'AI.";
-
-    // === INIZIO LOGICA DI PULIZIA ===
-    // Rimuovi caratteri di formattazione e prefissi numerici
-    let cleanedText = rawText
-        .replace(/\*\*/g, '')      // Rimuove ** (grassetto)
-        .replace(/\*/g, '')       // Rimuove * (corsivo/elenchi)
-        .replace(/#/g, '')        // Rimuove # (titoli)
-        .replace(/^\s*\d+\.\s*/gm, ''); // Rimuove "1. ", "2. " ecc. all'inizio delle righe
-
-    // Rimuovi eventuali etichette di istruzione residue (case-insensitive)
-    cleanedText = cleanedText
-        .replace(/VERDETTO SINTETICO:?/i, '')
-        .replace(/CONSIGLIO PRATICO:?/i, '')
-        .replace(/INCORAGGIAMENTO FINALE:?/i, '')
-        .trim(); // Rimuove spazi vuoti all'inizio e alla fine
-    // === FINE LOGICA DI PULIZIA ===
-
-    // Se la chiamata va a buon fine, SALVIAMO IL TIMESTAMP!
-    localStorage.setItem(AI_TIMESTAMP_KEY, new Date().getTime());
-    
-    // Mostra il testo pulito e formattato nell'HTML
-    aiFeedbackContentDiv.innerHTML = `<p>${cleanedText.replace(/\n/g, '<br>')}</p>`;
-
-    // Passa il testo PULITO alla sintesi vocale
-    if (cleanedText && cleanedText !== "Nessuna risposta valida dall'AI." && !cleanedText.startsWith("L'AI non ha fornito") && !cleanedText.startsWith("Richiesta bloccata")) {
-        speakText(cleanedText);
-    }
-
-} catch (error) {
-    console.error('Errore fetch AI:', error);
-    aiFeedbackContentDiv.innerHTML = `<p style="color: red;">Impossibile ottenere feedback AI: ${error.message}</p>`;
-} finally { 
-    updateAIButtonState();
-}
-    // === FINE MODIFICA 4 ===
 }
 
-// --- Funzione per la Sintesi Vocale (Text-to-Speech) ---
 function speakText(text, lang = 'it-IT') {
     if ('speechSynthesis' in window) {
         if (window.speechSynthesis.speaking) {
@@ -865,8 +943,7 @@ function speakText(text, lang = 'it-IT') {
 }
 
 if ('speechSynthesis' in window && typeof window.speechSynthesis.getVoices === 'function') {
-    window.speechSynthesis.onvoiceschanged = () => {
-    };
+    window.speechSynthesis.onvoiceschanged = () => {};
 }
 
 // --- Event Listeners ---
@@ -881,10 +958,11 @@ if(theoryButton) theoryButton.addEventListener('click', handleTheoryClick);
 document.addEventListener('DOMContentLoaded', () => {
     aiFeedbackContentDiv = document.getElementById('ai-feedback-content');
     getAIFeedbackButton = document.getElementById('get-ai-feedback-button');
-    
-    // === INIZIO MODIFICA 5: Selezioniamo il nostro nuovo span per il timer ===
     aiCooldownTimerSpan = document.getElementById('ai-cooldown-timer');
-    // === FINE MODIFICA 5 ===
+    appBlockOverlay = document.getElementById('app-block-overlay');
+    blockCountdownTimer = document.getElementById('block-countdown-timer');
+    
+    checkAndEnforceExerciseBlock();
 
     if (getAIFeedbackButton) {
         getAIFeedbackButton.style.display = 'none';
