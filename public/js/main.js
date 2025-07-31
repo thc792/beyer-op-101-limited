@@ -899,26 +899,48 @@ function updateMidiStatus(message, isConnected) {
 
 async function fetchAIFeedback(exerciseDef, stats) {
     if (!aiFeedbackContentDiv || !getAIFeedbackButton) { return; }
+    
     getAIFeedbackButton.disabled = true;
     aiFeedbackContentDiv.innerHTML = '<p>Analisi AI in corso...</p>';
     if (aiCooldownTimerSpan) aiCooldownTimerSpan.textContent = '';
-    const dataToSendToBackend = { exerciseDefinition: exerciseDef, exerciseStats: stats };
+
+    // Legge la lingua scelta dal menu a tendina e la aggiunge ai dati da inviare
+    const selectedLanguage = languageSelect.value || 'it-IT';
+    const dataToSendToBackend = { 
+        exerciseDefinition: exerciseDef, 
+        exerciseStats: stats,
+        language: selectedLanguage 
+    };
+
     try {
         const response = await fetch(AI_BACKEND_ENDPOINT, {
-            method: 'POST', headers: { 'Content-Type': 'application/json', }, body: JSON.stringify(dataToSendToBackend)
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(dataToSendToBackend)
         });
+
         const responseData = await response.json();
         if (!response.ok) { 
             throw new Error(responseData.error || `Errore dal backend: ${response.status}`); 
         }
+
         let rawText = responseData.aiFeedbackText || "Nessuna risposta valida dall'AI.";
+        
+        // Logica di pulizia della risposta
         let cleanedText = rawText.replace(/\*\*/g, '').replace(/\*/g, '').replace(/#/g, '').replace(/^\s*\d+\.\s*/gm, '');
         cleanedText = cleanedText.replace(/VERDETTO SINTETICO:?/i, '').replace(/CONSIGLIO PRATICO:?/i, '').replace(/INCORAGGIAMENTO FINALE:?/i, '').trim();
+        
+        // Salva il timestamp per il cooldown SOLO se la chiamata è andata a buon fine
         localStorage.setItem(AI_TIMESTAMP_KEY, new Date().getTime());
+        
+        // Mostra il risultato nell'interfaccia
         aiFeedbackContentDiv.innerHTML = `<p>${cleanedText.replace(/\n/g, '<br>')}</p>`;
+
+        // Passa il testo pulito e la lingua corretta alla sintesi vocale
         if (cleanedText && cleanedText !== "Nessuna risposta valida dall'AI." && !cleanedText.startsWith("L'AI non ha fornito") && !cleanedText.startsWith("Richiesta bloccata")) {
-            speakText(cleanedText);
+            speakText(cleanedText, selectedLanguage); 
         }
+
     } catch (error) {
         console.error('Errore fetch AI:', error);
         aiFeedbackContentDiv.innerHTML = `<p style="color: red;">Impossibile ottenere feedback AI: ${error.message}</p>`;
