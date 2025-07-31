@@ -625,7 +625,529 @@ const hand_independence_ex59 = [
             { keys: ["g/2"], duration: "h", midiValues: [43] }, { keys: ["c/2"], duration: "h", midiValues: [36] }
         ]
     },
+// =======================================================================================
+// === ESERCIZIO 56: Dialogo 3 vs 1 (Do e Sol7) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex56-handindep-3v1",
+    name: "Hand Independence Lv.1 - Ex. 56 (Dialogue 3 vs 1)",
+    category: "beyer_op101_hand_indep_lvl1",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "La mano melodica suona 3 note per battuta contro una nota tenuta dell'altra mano. L'esercizio si inverte a metà.",
+    notesTreble: [ // Mano Destra
+        // Sezione 1: MD Melodia (3 note), MS Accompagnamento (1 nota)
+        { keys: ["c/4"], duration: "q", midiValue: 60 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["g/4"], duration: "h", midiValue: 67 }, // C
+        { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["b/3"], duration: "h", midiValue: 59 }, // G7
+        { keys: ["c/4"], duration: "q", midiValue: 60 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["g/4"], duration: "h", midiValue: 67 }, // C
+        { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["g/4"], duration: "h", midiValue: 67 }, // G7
+        // Sezione 2: Inversione - MD Accompagnamento (1 nota)
+        { keys: ["c/4"], duration: "w", midiValue: 60 }, // C
+        { keys: ["b/3"], duration: "w", midiValue: 59 }, // G7
+        { keys: ["c/4"], duration: "w", midiValue: 60 }, // C
+        { keys: ["c/4"], duration: "w", midiValue: 60 }  // C (Finale)
+    ],
+    notesBass: [ // Mano Sinistra
+        // Sezione 1: MS Accompagnamento (1 nota)
+        { keys: ["c/3"], duration: "w", midiValues: [48] }, // C
+        { keys: ["g/2"], duration: "w", midiValues: [43] }, // G7
+        { keys: ["c/3"], duration: "w", midiValues: [48] }, // C
+        { keys: ["g/2"], duration: "w", midiValues: [43] }, // G7
+        // Sezione 2: Inversione - MS Melodia (3 note)
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["c/3"], duration: "h", midiValues: [48] }, // C
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["d/3"], duration: "h", midiValues: [50] }, // G7
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["c/3"], duration: "h", midiValues: [48] }, // C
+        { keys: ["c/2"], duration: "w", midiValues: [36] }  // C (Finale)
+    ]
+},
 
+// =======================================================================================
+// === ESERCIZIO 57: Crome contro Semiminime (Fa Maggiore) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex57-handindep-8th-vs-q",
+    name: "Hand Independence Lv.1 - Ex. 57 (8ths vs Quarters)",
+    category: "beyer_op101_hand_indep_lvl1",
+    staveLayout: "grand",
+    keySignature: "F", // Nuova tonalità
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "Una mano suona un flusso costante di crome in Fa Maggiore, mentre l'altra suona semplici semiminime.",
+    notesTreble: [ // Mano Destra
+        // Sezione 1: MD Crome, MS Semiminime
+        { keys: ["f/4"], duration: "8", midiValue: 65 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, { keys: ["a/4"], duration: "8", midiValue: 69 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, { keys: ["f/4"], duration: "8", midiValue: 65 }, { keys: ["e/4"], duration: "8", midiValue: 64 }, { keys: ["d/4"], duration: "8", midiValue: 62 }, { keys: ["c/4"], duration: "8", midiValue: 60 }, // F/C
+        { keys: ["d/4"], duration: "8", midiValue: 62 }, { keys: ["e/4"], duration: "8", midiValue: 64 }, { keys: ["f/4"], duration: "8", midiValue: 65 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, { keys: ["a/4"], duration: "8", midiValue: 69 }, { keys: ["bb/4"], duration: "8", midiValue: 70 }, { keys: ["a/4"], duration: "8", midiValue: 69 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, // Bb
+        // Sezione 2: Inversione
+        { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, // F
+        { keys: ["f/4"], duration: "w", midiValue: 65 }  // F
+    ],
+    notesBass: [ // Mano Sinistra
+        // Sezione 1: MS Semiminime
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, // F/C
+        { keys: ["bb/2"], duration: "q", midiValues: [46] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, // Bb
+        // Sezione 2: Inversione - MS Crome
+        { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, // F
+        { keys: ["f/2"], duration: "w", midiValues: [41] }  // F
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 58: Tempo di Valzer (3/4) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex58-handindep-waltz",
+    name: "Hand Independence Lv.1 - Ex. 58 (Waltz Time)",
+    category: "beyer_op101_hand_indep_lvl1",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "3/4", // Nuovo tempo
+    repetitions: 2,
+    description: "Una melodia semplice in 3/4 è accompagnata da un classico pattern 'Oom-Pah-Pah' del valzer.",
+    notesTreble: [ // Mano Destra
+        { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, // C
+        { keys: ["d/5"], duration: "h", midiValue: 74 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, // G7
+        { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, // G7
+        { keys: ["c/4"], duration: "h.", midiValue: 60 }, // C
+        // Inversione
+        { keys: ["c/5"], duration: "h.", midiValue: 72 }, // C
+        { keys: ["b/4"], duration: "h.", midiValue: 71 }, // G7
+        { keys: ["a/4"], duration: "h", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, // F
+        { keys: ["c/4"], duration: "h.", midiValue: 60 } // C
+    ],
+    notesBass: [ // Mano Sinistra
+        // Accompagnamento Valzer
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["d/3", "f/3"], duration: "q", midiValues: [50, 53] }, { keys: ["d/3", "f/3"], duration: "q", midiValues: [50, 53] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "f/3"], duration: "q", midiValues: [47, 53] }, { keys: ["b/2", "f/3"], duration: "q", midiValues: [47, 53] },
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] },
+        // Inversione (MS Melodia)
+        { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
+        { keys: ["d/3"], duration: "h", midiValues: [50] }, { keys: ["b/2"], duration: "q", midiValues: [47] },
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["f/2"], duration: "q", midiValues: [41] },
+        { keys: ["c/2"], duration: "h.", midiValues: [36] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 59: Ritmo Puntato (Sol Maggiore) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex59-handindep-dotted",
+    name: "Hand Independence Lv.1 - Ex. 59 (Dotted Rhythm)",
+    category: "beyer_op101_hand_indep_lvl1",
+    staveLayout: "grand",
+    keySignature: "G", // Nuova tonalità
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "La mano destra suona un ritmo puntato (croma puntata + semicroma) contro le semiminime costanti della sinistra.",
+    notesTreble: [ // Mano Destra
+        { keys: ["g/4"], duration: "8d", midiValue: 67 }, { keys: ["a/4"], duration: "16", midiValue: 69 }, { keys: ["b/4"], duration: "8d", midiValue: 71 }, { keys: ["c/5"], duration: "16", midiValue: 72 }, { keys: ["d/5"], duration: "h", midiValue: 74 },
+        { keys: ["c/5"], duration: "8d", midiValue: 72 }, { keys: ["b/4"], duration: "16", midiValue: 71 }, { keys: ["a/4"], duration: "8d", midiValue: 69 }, { keys: ["g/4"], duration: "16", midiValue: 67 }, { keys: ["f#/4"], duration: "h", midiValue: 66 },
+        { keys: ["g/4"], duration: "8d", midiValue: 67 }, { keys: ["a/4"], duration: "16", midiValue: 69 }, { keys: ["b/4"], duration: "h", midiValue: 71 }, { keys: ["g/4"], duration: "q", midiValue: 67 },
+        { keys: ["d/4"], duration: "w", midiValue: 62 },
+    ],
+    notesBass: [ // Mano Sinistra (semiminime costanti)
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["b/3"], duration: "q", midiValues: [59] }, { keys: ["d/4"], duration: "q", midiValues: [62] }, { keys: ["b/3"], duration: "q", midiValues: [59] },
+        { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["c/4"], duration: "q", midiValues: [60] }, { keys: ["e/4"], duration: "q", midiValues: [64] }, { keys: ["c/4"], duration: "q", midiValues: [60] },
+        { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["f#/3"], duration: "q", midiValues: [54] }, { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["f#/3"], duration: "q", midiValues: [54] },
+        { keys: ["g/2"], duration: "w", midiValues: [43] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 60: Contrappunto Semplice (Moto Contrario) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex60-handindep-contrary",
+    name: "Hand Independence Lv.2 - Ex. 60 (Contrary Motion)",
+    category: "beyer_op101_hand_indep_lvl2", // Livello 2
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "Le due mani suonano melodie indipendenti che spesso si muovono in direzione opposta (moto contrario).",
+    notesTreble: [ // Mano Destra (linea discendente)
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["e/4"], duration: "h", midiValue: 64 }, { keys: ["d/4"], duration: "h", midiValue: 62 },
+        { keys: ["c/4"], duration: "q", midiValue: 60 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra (linea ascendente)
+        { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["d/3"], duration: "h", midiValues: [50] },
+        { keys: ["e/3"], duration: "h", midiValues: [52] }, { keys: ["f/3"], duration: "h", midiValues: [53] },
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
+        { keys: ["c/3"], duration: "w", midiValues: [48] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 61: Arpeggi Incrociati (La Minore) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex61-handindep-arpeggios",
+    name: "Hand Independence Lv.2 - Ex. 61 (Crossed Arpeggios)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "Am", // Tonalità minore
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "Le mani suonano arpeggi che si alternano e si 'incrociano' ritmicamente.",
+    notesTreble: [ // Mano Destra
+        { keys: ["e/4"], duration: "q" , midiValue: 64}, { keys: ["r/4"], duration: "q" }, { keys: ["c/5"], duration: "q" , midiValue: 72}, { keys: ["r/4"], duration: "q" }, // Am
+        { keys: ["d/4"], duration: "q" , midiValue: 62}, { keys: ["r/4"], duration: "q" }, { keys: ["a/4"], duration: "q" , midiValue: 69}, { keys: ["r/4"], duration: "q" }, // Dm
+        { keys: ["e/4"], duration: "q" , midiValue: 64}, { keys: ["r/4"], duration: "q" }, { keys: ["b/4"], duration: "q" , midiValue: 71}, { keys: ["r/4"], duration: "q" }, // E
+        { keys: ["a/4"], duration: "h" , midiValue: 69}, { keys: ["e/4"], duration: "h" , midiValue: 64}  // Am
+    ],
+    notesBass: [ // Mano Sinistra
+        { keys: ["r/4"], duration: "q" }, { keys: ["a/3"], duration: "q" , midiValues: [57]}, { keys: ["r/4"], duration: "q" }, { keys: ["e/3"], duration: "q" , midiValues: [52]}, // Am
+        { keys: ["r/4"], duration: "q" }, { keys: ["f/3"], duration: "q" , midiValues: [53]}, { keys: ["r/4"], duration: "q" }, { keys: ["d/3"], duration: "q" , midiValues: [50]}, // Dm
+        { keys: ["r/4"], duration: "q" }, { keys: ["g#/3"], duration: "q" , midiValues: [56]}, { keys: ["r/4"], duration: "q" }, { keys: ["e/3"], duration: "q" , midiValues: [52]}, // E (con G#)
+        { keys: ["a/2"], duration: "h" , midiValues: [45]}, { keys: ["e/3"], duration: "h" , midiValues: [52]}  // Am
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 62: Studio con Walking Bass e Melodia Sincopata (NUOVO) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex62-handindep-walking-bass",
+    name: "Hand Independence Lv.2 - Ex. 62 (Walking Bass Study)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1, // È già lungo 16 battute
+    description: "Uno studio di 16 battute con una linea di 'walking bass' costante nella mano sinistra e una melodia sincopata e ritmicamente indipendente nella mano destra.",
+    notesTreble: [ // Mano Destra (Melodia sincopata)
+        // Sezione C (Battute 1-4)
+        { keys: ["r/4"], duration: "8" }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["e/4"], duration: "8", midiValue: 64 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["b/4"], duration: "8", midiValue: 71 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["d/4"], duration: "h", midiValue: 62 },
+        // Sezione Am (Battute 5-8)
+        { keys: ["r/4"], duration: "8" }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["e/4"], duration: "8", midiValue: 64 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["a/4"], duration: "8", midiValue: 69 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["c/4"], duration: "h", midiValue: 60 }, { keys: ["a/3"], duration: "h", midiValue: 57 },
+        // Sezione F (Battute 9-12)
+        { keys: ["r/4"], duration: "8" }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["c/4"], duration: "8", midiValue: 60 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["f/4"], duration: "8", midiValue: 65 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        // Sezione G7 -> C (Battute 13-16)
+        { keys: ["r/4"], duration: "8" }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["b/4"], duration: "8", midiValue: 71 }, { keys: ["d/5"], duration: "h", midiValue: 74 },
+        { keys: ["c/5"], duration: "h", midiValue: 72 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["d/4"], duration: "q", midiValue: 62 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra (Walking Bass)
+        // Sezione C (Battute 1-4)
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["f/3"], duration: "q", midiValues: [53] },
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["d/3"], duration: "q", midiValues: [50] },
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["e/3"], duration: "q", midiValues: [52] },
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["c/3"], duration: "h", midiValues: [48] },
+        // Sezione Am (Battute 5-8)
+        { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["b/2"], duration: "q", midiValues: [47] }, { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["d/3"], duration: "q", midiValues: [50] },
+        { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["b/2"], duration: "q", midiValues: [47] },
+        { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
+        { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["e/2"], duration: "q", midiValues: [40] }, { keys: ["a/2"], duration: "h", midiValues: [45] },
+        // Sezione F (Battute 9-12)
+        { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["g/2"], duration: "q", midiValues: [43] },
+        { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["a/2"], duration: "q", midiValues: [45] },
+        { keys: ["bb/2"], duration: "q", midiValues: [46] }, { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["f/2"], duration: "q", midiValues: [41] },
+        { keys: ["e/2"], duration: "q", midiValues: [40] }, { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["g/2"], duration: "h", midiValues: [43] },
+        // Sezione G7 -> C (Battute 13-16)
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2"], duration: "q", midiValues: [47] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["f/3"], duration: "q", midiValues: [53] },
+        { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["b/2"], duration: "q", midiValues: [47] },
+        { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["e/2"], duration: "q", midiValues: [40] },
+        { keys: ["c/2"], duration: "w", midiValues: [36] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 63: Melodia Sincopata e Basso Continuo ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex63-handindep-syncopation",
+    name: "Hand Independence Lv.2 - Ex. 63 (Syncopation)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "Una melodia sincopata nella mano destra suona contro un Basso Alberti costante nella sinistra.",
+    notesTreble: [ // Mano Destra (sincopata)
+        { keys: ["r/4"], duration: "8" }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["b/4"], duration: "8", midiValue: 71 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["a/4"], duration: "8", midiValue: 69 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["c/4"], duration: "h", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra (Basso Alberti)
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["d/3"], duration: "8", midiValues: [50] },
+        { keys: ["f/2"], duration: "8", midiValues: [41] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["f/2"], duration: "8", midiValues: [41] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["c/3"], duration: "8", midiValues: [48] },
+        { keys: ["c/3","g/3"], duration: "q", midiValues: [48, 55] }, { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["c/3"], duration: "h", midiValues: [48] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 64: Stile Canone (Voci che si imitano) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex64-handindep-canon",
+    name: "Hand Independence Lv.2 - Ex. 64 (Canon Style)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "G",
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "La mano sinistra imita la frase della mano destra con un ritardo di una battuta, creando un semplice canone.",
+    notesTreble: [ // Mano Destra (Leader)
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 },
+        { keys: ["c/5"], duration: "h", midiValue: 72 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+        { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["f#/4"], duration: "h", midiValue: 66 },
+        { keys: ["g/4"], duration: "w", midiValue: 67 }
+    ],
+    notesBass: [ // Mano Sinistra (Follower)
+        { keys: ["r/4"], duration: "w" }, // Pausa per la prima battuta
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["b/3"], duration: "q", midiValues: [59] }, { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["g/3"], duration: "q", midiValues: [55] },
+        { keys: ["c/4"], duration: "h", midiValues: [60] }, { keys: ["b/3"], duration: "h", midiValues: [59] },
+        { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["f#/3"], duration: "h", midiValues: [54] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 65: Accompagnamento Stride Semplificato ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex65-handindep-stride",
+    name: "Hand Independence Lv.1 - Ex. 65 (Simple Stride)",
+    category: "beyer_op101_hand_indep_lvl1", // Ritorno a Lv.1 per uno stile diverso
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 2,
+    description: "Introduzione allo stile 'stride'. La mano sinistra alterna una nota bassa sul primo e terzo tempo con un accordo sul secondo e quarto.",
+    notesTreble: [ // Mano Destra (Melodia semplice)
+        { keys: ["e/4"], duration: "h", midiValue: 64 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+        { keys: ["f/4"], duration: "h", midiValue: 65 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["c/4"], duration: "h", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra (Pattern Stride)
+        // C Major
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] },
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] },
+        // F Major
+        { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["a/2", "c/3"], duration: "q", midiValues: [45, 48] },
+        { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["a/2", "c/3"], duration: "q", midiValues: [45, 48] },
+        // G Major
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] },
+        // C Major
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] },
+        { keys: ["c/2"], duration: "h", midiValues: [36] }
+    ]
+},
+// =======================================================================================
+// === ESERCIZIO 66: Studio su Scale e Arpeggi Incrociati (16 Battute) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex66-handindep-scales-arps",
+    name: "Hand Independence Lv.2 - Ex. 66 (Scales & Arpeggios)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1,
+    description: "Uno studio di 16 battute dove una mano esegue scale fluide mentre l'altra suona accordi arpeggiati.",
+    notesTreble: [ // Mano Destra
+        // Sezione 1: MD Scale, MS Arpeggi
+        { keys: ["c/4"], duration: "8" , midiValue: 60}, { keys: ["d/4"], duration: "8" , midiValue: 62}, { keys: ["e/4"], duration: "8" , midiValue: 64}, { keys: ["f/4"], duration: "8" , midiValue: 65}, { keys: ["g/4"], duration: "8" , midiValue: 67}, { keys: ["a/4"], duration: "8" , midiValue: 69}, { keys: ["b/4"], duration: "8" , midiValue: 71}, { keys: ["c/5"], duration: "8" , midiValue: 72}, // Scala di Do
+        { keys: ["b/4"], duration: "8" , midiValue: 71}, { keys: ["a/4"], duration: "8" , midiValue: 69}, { keys: ["g/4"], duration: "8" , midiValue: 67}, { keys: ["f/4"], duration: "8" , midiValue: 65}, { keys: ["e/4"], duration: "h" , midiValue: 64}, // Scala discendente
+        { keys: ["d/4"], duration: "8" , midiValue: 62}, { keys: ["e/4"], duration: "8" , midiValue: 64}, { keys: ["f#/4"], duration: "8" , midiValue: 66}, { keys: ["g/4"], duration: "8" , midiValue: 67}, { keys: ["a/4"], duration: "8" , midiValue: 69}, { keys: ["b/4"], duration: "8" , midiValue: 71}, { keys: ["c/5"], duration: "8" , midiValue: 72}, { keys: ["d/5"], duration: "8" , midiValue: 74}, // Scala di Sol
+        { keys: ["c/5"], duration: "8" , midiValue: 72}, { keys: ["b/4"], duration: "8" , midiValue: 71}, { keys: ["a/4"], duration: "8" , midiValue: 69}, { keys: ["g/4"], duration: "8" , midiValue: 67}, { keys: ["f#/4"], duration: "h" , midiValue: 66},
+        // Sezione 2: Inversione
+        { keys: ["c/4", "e/4", "g/4"], duration: "h", midiValues: [60, 64, 67] }, { keys: ["d/4", "f/4", "a/4"], duration: "h", midiValues: [62, 65, 69] },
+        { keys: ["c/4", "e/4", "g/4"], duration: "w", midiValues: [60, 64, 67] },
+        { keys: ["b/3", "d/4", "g/4"], duration: "h", midiValues: [59, 62, 67] }, { keys: ["c/4", "e/4", "a/4"], duration: "h", midiValues: [60, 64, 69] },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra
+        // Sezione 1: MS Arpeggi
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["c/4"], duration: "q", midiValues: [60] },
+        { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["g/3"], duration: "h", midiValues: [55] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2"], duration: "q", midiValues: [47] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["g/3"], duration: "q", midiValues: [55] },
+        { keys: ["g/2"], duration: "h", midiValues: [43] }, { keys: ["d/3"], duration: "h", midiValues: [50] },
+        // Sezione 2: Inversione (MS Scale)
+        { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
+        { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["a/3"], duration: "8", midiValues: [57] },
+        { keys: ["g/3"], duration: "h", midiValues: [55] }, { keys: ["c/3"], duration: "h", midiValues: [48] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 67: Canone a due voci esteso (16 battute) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex67-handindep-extended-canon",
+    name: "Hand Independence Lv.2 - Ex. 67 (Extended Canon)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "G",
+    timeSignature: "4/4",
+    repetitions: 1,
+    description: "Un canone più lungo e complesso. La mano sinistra imita la destra dopo un ritardo di due battute.",
+    notesTreble: [ // Mano Destra (Leader)
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+        { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["f#/4"], duration: "h", midiValue: 66 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+        { keys: ["d/5"], duration: "h", midiValue: 74 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+        { keys: ["f#/4"], duration: "h", midiValue: 66 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "w", midiValue: 62 },
+        { keys: ["r/4"], duration: "w"}, { keys: ["r/4"], duration: "w"}, // MD Pausa mentre MS finisce
+    ],
+    notesBass: [ // Mano Sinistra (Follower, inizia dopo 2 battute)
+        { keys: ["r/4"], duration: "w" }, { keys: ["r/4"], duration: "w" },
+        { keys: ["g/3"], duration: "h", midiValues: [55] }, { keys: ["b/3"], duration: "h", midiValues: [59] },
+        { keys: ["c/4"], duration: "q", midiValues: [60] }, { keys: ["b/3"], duration: "q", midiValues: [59] }, { keys: ["a/3"], duration: "h", midiValues: [57] },
+        { keys: ["g/3"], duration: "h", midiValues: [55] }, { keys: ["f#/3"], duration: "h", midiValues: [54] },
+        { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["b/3"], duration: "h", midiValues: [59] },
+        { keys: ["d/4"], duration: "h", midiValues: [62] }, { keys: ["c/4"], duration: "h", midiValues: [60] },
+        { keys: ["b/3"], duration: "q", midiValues: [59] }, { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["g/3"], duration: "h", midiValues: [55] },
+        { keys: ["f#/3"], duration: "h", midiValues: [54] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
+        { keys: ["d/3"], duration: "w", midiValues: [50] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 68: Moto Obliquo e Contrario (16 battute) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex68-handindep-oblique-motion",
+    name: "Hand Independence Lv.2 - Ex. 68 (Oblique Motion)",
+    category: "beyer_op101_hand_indep_lvl2",
+    staveLayout: "grand",
+    keySignature: "Am",
+    timeSignature: "3/4",
+    repetitions: 1,
+    description: "Una mano tiene note lunghe (moto obliquo) mentre l'altra si muove. Include sezioni in moto contrario.",
+    notesTreble: [ // Mano Destra
+        { keys: ["a/4"], duration: "h.", midiValue: 69 },
+        { keys: ["b/4"], duration: "h.", midiValue: 71 },
+        { keys: ["c/5"], duration: "h", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 },
+        { keys: ["a/4"], duration: "h.", midiValue: 69 },
+        { keys: ["g#/4"], duration: "h.", midiValue: 68 }, // E7
+        { keys: ["a/4"], duration: "h", midiValue: 69 }, { keys: ["b/4"], duration: "q", midiValue: 71 },
+        { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, // Moto contrario
+        { keys: ["g#/4"], duration: "q", midiValue: 68 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, // Moto contrario
+        { keys: ["a/4"], duration: "h.", midiValue: 69 }
+    ],
+    notesBass: [ // Mano Sinistra
+        { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["f/3"], duration: "q", midiValues: [53] },
+        { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
+        { keys: ["b/2"], duration: "h.", midiValues: [47] },
+        { keys: ["e/3"], duration: "h.", midiValues: [52] },
+        { keys: ["f/3"], duration: "h.", midiValues: [53] },
+        { keys: ["d/3"], duration: "h.", midiValues: [50] },
+        { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, // Moto contrario
+        { keys: ["a/3"], duration: "q", midiValues: [57] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, // Moto contrario
+        { keys: ["a/2"], duration: "h.", midiValues: [45] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 69: Studio Avanzato su Ritmi Sincopati (16 battute) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex69-handindep-advanced-sync",
+    name: "Hand Independence Lv.3 - Ex. 69 (Advanced Syncopation)",
+    category: "beyer_op101_hand_indep_lvl3", // Livello 3
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1,
+    description: "Entrambe le mani suonano ritmi sincopati che si intrecciano, richiedendo un alto livello di indipendenza ritmica.",
+    notesTreble: [ // Mano Destra
+        { keys: ["r/4"], duration: "8" }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["e/4"], duration: "8", midiValue: 64 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["r/4"], duration: "8" }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["r/4"], duration: "q" }, { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "8", midiValue: 69 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["a/4"], duration: "h", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 },
+        { keys: ["f/4"], duration: "h", midiValue: 65 }, { keys: ["d/4"], duration: "h", midiValue: 62 },
+        { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["c/4"], duration: "q", midiValue: 60 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["b/3"], duration: "q", midiValue: 59 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["r/4"], duration: "h" }, { keys: ["g/3"], duration: "q", midiValues: [55] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["r/4"], duration: "h" }, { keys: ["d/3"], duration: "q", midiValues: [50] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["e/3"], duration: "h", midiValues: [52] }, { keys: ["g/3"], duration: "q", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] },
+        { keys: ["c/3"], duration: "w", midiValues: [48] },
+        { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["r/4"], duration: "q" }, { keys: ["c/3"], duration: "h", midiValues: [48] },
+        { keys: ["g/2"], duration: "h", midiValues: [43] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
+        { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["g/2"], duration: "h", midiValues: [43] },
+        { keys: ["c/2"], duration: "w", midiValues: [36] }
+    ]
+},
+
+// =======================================================================================
+// === ESERCIZIO 70: Fuga Semplice a Due Voci (16 battute) ===
+// =======================================================================================
+{
+    id: "beyer-op101-ex70-handindep-fugue",
+    name: "Hand Independence Lv.3 - Ex. 70 (Simple Fugue)",
+    category: "beyer_op101_hand_indep_lvl3",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1,
+    description: "Un'introduzione allo stile polifonico di una fuga. La mano destra (soggetto) presenta un tema, e la sinistra (risposta) lo ripropone una quinta sotto, mentre la destra continua con un controsoggetto.",
+    notesTreble: [ // Mano Destra (Soggetto e Controsoggetto)
+        // Soggetto
+        { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["e/5"], duration: "h", midiValue: 76 },
+        { keys: ["f/5"], duration: "q", midiValue: 77 }, { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["d/5"], duration: "h", midiValue: 74 },
+        { keys: ["c/5"], duration: "w", midiValue: 72 },
+        // Controsoggetto
+        { keys: ["b/4"], duration: "8", midiValue: 71 }, { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["d/5"], duration: "8", midiValue: 74 }, { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+        { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["d/5"], duration: "h", midiValue: 74 }, { keys: ["e/5"], duration: "h", midiValue: 76 },
+        { keys: ["f/5"], duration: "h", midiValue: 77 }, { keys: ["d/5"], duration: "h", midiValue: 74 },
+        { keys: ["e/5"], duration: "w", midiValue: 76 },
+        // Coda
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["b/4"], duration: "h", midiValue: 71 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+        { keys: ["f/4"], duration: "h", midiValue: 65 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["g/4"], duration: "w", midiValue: 67 },
+        { keys: ["f/4"], duration: "h", midiValue: 65 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "h", midiValue: 62 }, { keys: ["b/3"], duration: "h", midiValue: 59 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [ // Mano Sinistra (Risposta)
+        { keys: ["r/4"], duration: "w" },
+        { keys: ["r/4"], duration: "w" },
+        { keys: ["r/4"], duration: "w" },
+        // Risposta (Soggetto trasposto una quinta sotto)
+        { keys: ["f/4"], duration: "q", midiValues: [65] }, { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["a/4"], duration: "h", midiValues: [69] },
+        { keys: ["bb/4"], duration: "q", midiValues: [70] }, { keys: ["a/4"], duration: "q", midiValues: [69] }, { keys: ["g/4"], duration: "h", midiValues: [67] },
+        { keys: ["f/4"], duration: "w", midiValues: [65] },
+        // Sviluppo
+        { keys: ["e/4"], duration: "8", midiValues: [64] }, { keys: ["f/4"], duration: "8", midiValues: [65] }, { keys: ["g/4"], duration: "8", midiValues: [67] }, { keys: ["f/4"], duration: "8", midiValues: [65] }, { keys: ["e/4"], duration: "h", midiValues: [64] },
+        { keys: ["d/4"], duration: "w", midiValues: [62] },
+        // Coda
+        { keys: ["c/4"], duration: "h", midiValues: [60] }, { keys: ["d/4"], duration: "h", midiValues: [50] }, // Errore MIDI, corretto a d/3 -> 50
+        { keys: ["e/3"], duration: "h", midiValues: [52] }, { keys: ["c/3"], duration: "h", midiValues: [48] },
+        { keys: ["d/3"], duration: "h", midiValues: [50] }, { keys: ["f/3"], duration: "h", midiValues: [53] },
+        { keys: ["e/3"], duration: "w", midiValues: [52] },
+        { keys: ["d/3"], duration: "h", midiValues: [50] }, { keys: ["c/3"], duration: "h", midiValues: [48] },
+        { keys: ["g/2"], duration: "h", midiValues: [43] }, { keys: ["e/2"], duration: "h", midiValues: [40] },
+        { keys: ["c/2"], duration: "w", midiValues: [36] }
+    ]
+},
 
 
     

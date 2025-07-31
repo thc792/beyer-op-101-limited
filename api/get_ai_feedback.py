@@ -54,6 +54,11 @@ class handler(BaseHTTPRequestHandler):
                 "Sei un insegnante di pianoforte AI esperto, amichevole e incoraggiante.",
                 f"Esercizio: {exercise_definition.get('name', 'Sconosciuto')}",
                 f"Tonalità: {exercise_definition.get('keySignature', 'N/D')}, Indicazione di Tempo: {exercise_definition.get('timeSignature', 'N/D')}",
+                
+                # === MODIFICA: Aggiunta Contesto Didattico ===
+                f"Categoria: {exercise_definition.get('category', 'N/D').replace('_', ' ')}",
+                f"Obiettivo Didattico: {exercise_definition.get('purpose', 'Non specificato.')}",
+                # === FINE MODIFICA ===
             ]
             
             exercise_bpm_str = str(exercise_definition.get('bpm', "N/A"))
@@ -105,13 +110,11 @@ class handler(BaseHTTPRequestHandler):
             else:
                 prompt_parts.append("\nNessun dato di ripetizione disponibile per l'analisi.")
 
-            # === INIZIO MODIFICA PROMPT ===
             prompt_parts.append("\n\n--- ISTRUZIONI PER IL TUO FEEDBACK (DEVE ESSERE MOLTO CONCISO, MASSIMO 5-6 FRASI TOTALI) ---")
             prompt_parts.append("Genera una risposta testuale pulita, senza usare markdown come asterischi o grassetto. Non includere le etichette numeriche come '1.', '2.' o '3.' nella tua risposta. Struttura il tuo pensiero in tre paragrafi distinti che coprano i seguenti punti:")
             prompt_parts.append("PRIMO PARAGRAFO (VERDETTO SINTETICO): Inizia con una delle seguenti frasi: 'Bravissimo! L'esercizio risulta complessivamente positivo.' se la performance è buona, oppure 'Il mio giudizio è che l'esercizio necessita ancora di lavoro. Principalmente perché:' seguito da 1-2 motivi chiave (es. 'hai saltato diverse note').")
             prompt_parts.append("SECONDO PARAGRAFO (CONSIGLIO PRATICO): Fornisci UN solo suggerimento breve e specifico per aiutare a migliorare l'aspetto più critico. (es. 'Rallenta e concentrati sul contare ad alta voce...').")
             prompt_parts.append("TERZO PARAGRAFO (INCORAGGIAMENTO FINALE): Concludi con una singola frase positiva e incoraggiante. (es. 'Continua così, vedo dei miglioramenti!').")
-            # === FINE MODIFICA PROMPT ===
             
             final_prompt = "\n".join(prompt_parts)
             

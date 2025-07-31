@@ -1407,58 +1407,63 @@ const beyer_op101_fase4_exercises_71_101 = [
             {keys:["eb/1","g/1","bb/1"],duration:"h",midiValues:[27,31,34]},{keys:["eb/1","g/1","bb/1"],duration:"q",midiValues:[27,31,34]}
         ]
     },
-    {
-        id: "beyer-op101-f4-ex95",
-        name: "Fase 4 - Ex. 95: Slow Blues in Do",
-        purpose: "Introdurre il feeling del blues lento, la scala blues di Do e gli accordi di settima.",
-        category: "beyer_op101_fase4", // o una nuova categoria "blues_studies"
-        staveLayout: "grand",
-        keySignature: "C", // Gli accidenti della scala blues saranno scritti
-        timeSignature: "4/4", // Slow Blues (può essere anche 12/8 feel, ma usiamo 4/4 con terzine)
-        repetitions: 1, // 12 battute (struttura blues classica)
-        notesTreble: [ // Melodia con note della scala blues di Do (C, Eb, F, F#, G, Bb)
-            // C7 (4 battute)
-            {keys:["eb/4"],duration:"q",midiValues:[63]},{keys:["g/4"],duration:"q",midiValues:[67]},{keys:["bb/4"],duration:"h",midiValues:[70]},
-            {keys:["g/4"],duration:"q"},{keys:["eb/4"],duration:"q"},{keys:["c/4"],duration:"h",midiValues:[60]},
-            {keys:["f/4"],duration:"8",triplet:"start",midiValues:[65]},{keys:["f#/4"],duration:"8",midiValues:[66]},{keys:["g/4"],duration:"8",triplet:"end",midiValues:[67]},{keys:["eb/4"],duration:"q",midiValues:[63]},{keys:["c/4"],duration:"h",midiValues:[60]},
-            {keys:["g/3"],duration:"w",midiValues:[55]}, // Nota lunga o bending simulato
-            // F7 (2 battute)
-            {keys:["ab/4"],duration:"q",midiValues:[68]},{keys:["c/5"],duration:"q",midiValues:[72]},{keys:["eb/5"],duration:"h",midiValues:[75]}, // Note della scala blues di Fa su accordo F7
-            {keys:["c/5"],duration:"q"},{keys:["ab/4"],duration:"q"},{keys:["f/4"],duration:"h",midiValues:[65]},
-            // C7 (2 battute)
-            {keys:["eb/4"],duration:"q",midiValues:[63]},{keys:["g/4"],duration:"q",midiValues:[67]},{keys:["c/4"],duration:"h",midiValues:[60]},
-            {keys:["bb/3"],duration:"h",midiValues:[58]},{keys:["g/3"],duration:"h",midiValues:[55]},
-            // G7 (1 battuta)
-            {keys:["b/3"],duration:"q",midiValues:[59]},{keys:["d/4"],duration:"q",midiValues:[62]},{keys:["f/4"],duration:"h",midiValues:[65]}, // Note di G7
-            // F7 (1 battuta)
-            {keys:["ab/3"],duration:"q",midiValues:[56]},{keys:["c/4"],duration:"q",midiValues:[60]},{keys:["eb/4"],duration:"h",midiValues:[63]},
-            // C7 (1 battuta)
-            {keys:["g/4"],duration:"h",midiValues:[67]},{keys:["eb/4"],duration:"h",midiValues:[63]},
-            // G7 (1 battuta - turnaround) o C7
-            {keys:["d/4"],duration:"q",midiValues:[62]},{keys:["f/4"],duration:"q",midiValues:[65]},{keys:["b/3"],duration:"q",midiValues:[59]},{keys:["g/4"],duration:"q",staccato:true,midiValues:[67]} // Staccato finale
-        ],
-        notesBass: [ // Accompagnamento con accordi di settima o walking bass semplice
-            // C7
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            // F7
-            {keys:["f/2","a/2","c/3","eb/3"],duration:"h",midiValues:[41,45,48,51]},{keys:["f/2","a/2","c/3","eb/3"],duration:"h",midiValues:[41,45,48,51]},
-            {keys:["f/2","a/2","c/3","eb/3"],duration:"h",midiValues:[41,45,48,51]},{keys:["f/2","a/2","c/3","eb/3"],duration:"h",midiValues:[41,45,48,51]},
-            // C7
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            // G7
-            {keys:["g/2","b/2","d/3","f/3"],duration:"h",midiValues:[43,47,50,53]},{keys:["g/2","b/2","d/3","f/3"],duration:"h",midiValues:[43,47,50,53]},
-            // F7
-            {keys:["f/2","a/2","c/3","eb/3"],duration:"h",midiValues:[41,45,48,51]},{keys:["f/2","a/2","c/3","eb/3"],duration:"h",midiValues:[41,45,48,51]},
-            // C7
-            {keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},{keys:["c/3","e/3","g/3","bb/3"],duration:"h",midiValues:[48,52,55,58]},
-            // G7 (turnaround)
-            {keys:["g/2","b/2","d/3","f/3"],duration:"w",midiValues:[43,47,50,53]}
-        ]
-    },
+// =======================================================================================
+// === ESERCIZIO 95: Slow Blues in Do (CORRETTO) ===
+// =======================================================================================
+{
+    id: "beyer-op101-f4-ex95",
+    name: "Fase 4 - Ex. 95: Slow Blues in Do",
+    purpose: "Introdurre il feeling del blues lento, la scala blues di Do e gli accordi di settima.",
+    category: "beyer_op101_fase4",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1, // 12 battute
+    description: "Un classico giro di blues di 12 battute in Do, con una melodia che utilizza le 'blue notes' e un accompagnamento di accordi di settima.",
+    notesTreble: [ // Melodia con note della scala blues di Do (C, Eb, F, F#, G, Bb)
+        // C7 (4 battute)
+        { keys: ["eb/4"], duration: "q", midiValue: 63 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["bb/4"], duration: "h", midiValue: 70 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["eb/4"], duration: "q", midiValue: 63 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        // Ritmo terzinato sostituito con ritmo puntato per stabilità (swing feel)
+        { keys: ["f/4"], duration: "qd", midiValue: 65 }, { keys: ["g/4"], duration: "8", midiValue: 67 }, { keys: ["eb/4"], duration: "h", midiValue: 63 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 },
+        // F7 (2 battute)
+        { keys: ["ab/4"], duration: "q", midiValue: 68 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["eb/5"], duration: "h", midiValue: 75 },
+        { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["ab/4"], duration: "q", midiValue: 68 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        // C7 (2 battute)
+        { keys: ["eb/4"], duration: "q", midiValue: 63 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["bb/3"], duration: "h", midiValue: 58 }, { keys: ["g/3"], duration: "h", midiValue: 55 },
+        // G7 (1 battuta)
+        { keys: ["b/3"], duration: "q", midiValue: 59 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        // F7 (1 battuta)
+        { keys: ["ab/3"], duration: "q", midiValue: 56 }, { keys: ["c/4"], duration: "q", midiValue: 60 }, { keys: ["eb/4"], duration: "h", midiValue: 63 },
+        // C7 (1 battuta)
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["eb/4"], duration: "h", midiValue: 63 },
+        // G7 (1 battuta - turnaround)
+        { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["b/3"], duration: "q", midiValue: 59 }, { keys: ["g/4"], duration: "q", staccato: true, midiValue: 67 }
+    ],
+    notesBass: [ // Accompagnamento con accordi di settima
+        // C7
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        // F7
+        { keys: ["f/2", "a/2", "eb/3"], duration: "h", midiValues: [41, 45, 51] }, { keys: ["f/2", "a/2", "eb/3"], duration: "h", midiValues: [41, 45, 51] },
+        { keys: ["f/2", "a/2", "eb/3"], duration: "h", midiValues: [41, 45, 51] }, { keys: ["f/2", "a/2", "eb/3"], duration: "h", midiValues: [41, 45, 51] },
+        // C7
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        // G7
+        { keys: ["g/2", "b/2", "f/3"], duration: "h", midiValues: [43, 47, 53] }, { keys: ["g/2", "b/2", "f/3"], duration: "h", midiValues: [43, 47, 53] },
+        // F7
+        { keys: ["f/2", "a/2", "eb/3"], duration: "h", midiValues: [41, 45, 51] }, { keys: ["f/2", "a/2", "eb/3"], duration: "h", midiValues: [41, 45, 51] },
+        // C7
+        { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] }, { keys: ["c/3", "e/3", "bb/3"], duration: "h", midiValues: [48, 52, 58] },
+        // G7 (turnaround)
+        { keys: ["g/2", "b/2", "f/3"], duration: "w", midiValues: [43, 47, 53] }
+    ]
+},
     // =======================================================================================
     // === Esercizio 96: Up-Tempo Blues Shuffle in Sol ===
     // Focus: Scala Blues di Sol, ritmo shuffle (crome terzinate), accordi di settima.

@@ -301,69 +301,69 @@ const beyer_op101_fase2_exercises_11_30_corrected = [
             { keys: ["g/3"], duration: "w", midiValues: [55] }
         ]
     },
-    // =======================================================================================
-    // === ESERCIZI RIASSUNTIVI 21-30: Combinazione graduale dei concetti ===
-    // =======================================================================================
-    {
-        id: "beyer-op101-f2-ex21",
-        name: "Fase 2 - Ex. 21: Studiettino in Do - Legato e Accompagnamento",
-        purpose: "Combinare legato fluido in MD con accompagnamento semplice in MS.",
-        category: "beyer_op101_fase2",
-        staveLayout: "grand",
-        keySignature: "C",
-        timeSignature: "4/4",
-        repetitions: 1,
-        notesTreble: [ // 8 battute
-            { keys: ["e/5"], duration: "q", midiValues: [76] }, { keys: ["f/5"], duration: "q", midiValues: [77] }, { keys: ["g/5"], duration: "h", midiValues: [79] },
-            { keys: ["a/5"], duration: "q", midiValues: [81] }, { keys: ["g/5"], duration: "q", midiValues: [79] }, { keys: ["f/5"], duration: "h", midiValues: [77] },
-            { keys: ["e/5"], duration: "q", midiValues: [76] }, { keys: ["d/5"], duration: "q", midiValues: [74] }, { keys: ["c/5"], duration: "h", midiValues: [72] },
-            { keys: ["d/5"], duration: "h", midiValues: [74] }, { keys: ["e/5"], duration: "h", midiValues: [76] },
-            { keys: ["f/5"], duration: "q", midiValues: [77] }, { keys: ["e/5"], duration: "q", midiValues: [76] }, { keys: ["d/5"], duration: "h", midiValues: [74] },
-            { keys: ["g/5"], duration: "q", midiValues: [79] }, { keys: ["f/5"], duration: "q", midiValues: [77] }, { keys: ["e/5"], duration: "h", midiValues: [76] },
-            { keys: ["d/5"], duration: "h", midiValues: [74] }, { keys: ["b/4"], duration: "h", midiValues: [71] },
-            { keys: ["c/5"], duration: "w", midiValues: [72] }
-        ],
-        notesBass: [
-            { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
-            { keys: ["f/3"], duration: "h", midiValues: [53] }, { keys: ["d/3"], duration: "h", midiValues: [50] },
-            { keys: ["g/3"], duration: "h", midiValues: [55] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
-            { keys: ["c/3"], duration: "w", midiValues: [48] },
-            { keys: ["g/2"], duration: "h", midiValues: [43] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
-            { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["f/3"], duration: "h", midiValues: [53] },
-            { keys: ["g/3"], duration: "w", midiValues: [55] },
-            { keys: ["c/3"], duration: "w", midiValues: [48] }
-        ]
-    },
-    {
-        id: "beyer-op101-f2-ex22",
-        name: "Fase 2 - Ex. 22: Studiettino con Fa# - Legato e Melodia",
-        purpose: "Praticare il Fa# in un contesto melodico con legato.",
-        category: "beyer_op101_fase2",
-        staveLayout: "grand",
-        keySignature: "C",
-        timeSignature: "3/4",
-        repetitions: 1,
-        notesTreble: [ // 8 battute
-            { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["a/4"], duration: "q", midiValues: [69] }, { keys: ["b/4"], duration: "q", midiValues: [71] },
-            { keys: ["c/5"], duration: "h", midiValues: [72] }, { keys: ["a/4"], duration: "q", midiValues: [69] },
-            { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["f#/4"], duration: "q", midiValues: [66] }, { keys: ["g/4"], duration: "q", midiValues: [67] },
-            { keys: ["d/5"], duration: "h.", midiValues: [74] },
-            { keys: ["c/5"], duration: "q", midiValues: [72] }, { keys: ["b/4"], duration: "q", midiValues: [71] }, { keys: ["a/4"], duration: "q", midiValues: [69] },
-            { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["e/4"], duration: "q", midiValues: [64] }, { keys: ["c/4"], duration: "q", midiValues: [60] },
-            { keys: ["d/4"], duration: "q", midiValues: [62] }, { keys: ["f#/4"], duration: "q", midiValues: [66] }, { keys: ["a/4"], duration: "q", midiValues: [69] },
-            { keys: ["g/4"], duration: "h.", midiValues: [67] }
-        ],
-        notesBass: [
-            { keys: ["g/2"], duration: "h.", midiValues: [43] },
-            { keys: ["c/3"], duration: "h.", midiValues: [48] },
-            { keys: ["d/3"], duration: "h.", midiValues: [50] },
-            { keys: ["g/2"], duration: "h.", midiValues: [43] },
-            { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["b/2"], duration: "q", midiValues: [47]},
-            { keys: ["c/3"], duration: "h.", midiValues: [48] },
-            { keys: ["g/2"], duration: "h.", midiValues: [43] },
-            { keys: ["g/2"], duration: "h.", midiValues: [43] }
-        ]
-    },
+// =======================================================================================
+// === ESERCIZI RIASSUNTIVI 21-30: Combinazione graduale dei concetti (CORRETTO) ===
+// =======================================================================================
+{
+    id: "beyer-op101-f2-ex21",
+    name: "Fase 2 - Ex. 21: Studiettino in Do - Legato e Accompagnamento",
+    purpose: "Combinare legato fluido in MD con accompagnamento semplice in MS.",
+    category: "beyer_op101_fase2",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1,
+    notesTreble: [ // 8 battute - CORRETTO CON midiValue
+        { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["f/5"], duration: "q", midiValue: 77 }, { keys: ["g/5"], duration: "h", midiValue: 79 },
+        { keys: ["a/5"], duration: "q", midiValue: 81 }, { keys: ["g/5"], duration: "q", midiValue: 79 }, { keys: ["f/5"], duration: "h", midiValue: 77 },
+        { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["d/5"], duration: "h", midiValue: 74 }, { keys: ["e/5"], duration: "h", midiValue: 76 },
+        { keys: ["f/5"], duration: "q", midiValue: 77 }, { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["d/5"], duration: "h", midiValue: 74 },
+        { keys: ["g/5"], duration: "q", midiValue: 79 }, { keys: ["f/5"], duration: "q", midiValue: 77 }, { keys: ["e/5"], duration: "h", midiValue: 76 },
+        { keys: ["d/5"], duration: "h", midiValue: 74 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+        { keys: ["c/5"], duration: "w", midiValue: 72 }
+    ],
+    notesBass: [
+        { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
+        { keys: ["f/3"], duration: "h", midiValues: [53] }, { keys: ["d/3"], duration: "h", midiValues: [50] },
+        { keys: ["g/3"], duration: "h", midiValues: [55] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
+        { keys: ["c/3"], duration: "w", midiValues: [48] },
+        { keys: ["g/2"], duration: "h", midiValues: [43] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
+        { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["f/3"], duration: "h", midiValues: [53] },
+        { keys: ["g/3"], duration: "w", midiValues: [55] },
+        { keys: ["c/3"], duration: "w", midiValues: [48] }
+    ]
+},
+{
+    id: "beyer-op101-f2-ex22",
+    name: "Fase 2 - Ex. 22: Studiettino in Sol - Stile Valzer",
+    purpose: "Praticare il Fa# in un contesto melodico con un accompagnamento in 3/4.",
+    category: "beyer_op101_fase2",
+    staveLayout: "grand",
+    keySignature: "G", // Messo in Sol Maggiore per chiarezza, anche se ha solo un Fa#
+    timeSignature: "3/4",
+    repetitions: 1,
+    notesTreble: [ // 8 battute - NUOVA MELODIA
+        { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["g/4"], duration: "q", midiValue: 67 },
+        { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["f#/4"], duration: "q", midiValue: 66 },
+        { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "q", midiValue: 69 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["b/4"], duration: "q", midiValue: 71 },
+        { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["g/4"], duration: "q", midiValue: 67 },
+        { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["a/4"], duration: "q", midiValue: 69 },
+        { keys: ["f#/4"], duration: "q", midiValue: 66 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["b/3"], duration: "q", midiValue: 59 },
+        { keys: ["g/4"], duration: "h.", midiValue: 67 }
+    ],
+    notesBass: [ // NUOVO ACCOMPAGNAMENTO VALZER
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] },
+        { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] }, { keys: ["e/3", "g/3"], duration: "q", midiValues: [52, 55] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] },
+        { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] }, { keys: ["b/2", "d/3"], duration: "q", midiValues: [47, 50] },
+        { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["f#/3", "a/3"], duration: "q", midiValues: [54, 57] }, { keys: ["f#/3", "a/3"], duration: "q", midiValues: [54, 57] },
+        { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["f#/3", "a/3"], duration: "q", midiValues: [54, 57] }, { keys: ["f#/3", "a/3"], duration: "q", midiValues: [54, 57] },
+        { keys: ["g/2", "b/2", "d/3"], duration: "h.", midiValues: [43, 47, 50] }
+    ]
+},
      // Ex. 23: Studiettino con Sib.
     {
         id: "beyer-op101-f2-ex23",
