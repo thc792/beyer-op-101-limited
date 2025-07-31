@@ -21,64 +21,96 @@ const beyer_op101_hand_independence_lvl1_exercises = [];
 // =======================================================================================
 const hand_independence_ex51 = [
     {
-        id: "beyer-op101-ex51handindep1",
-        name: "Hand Independence Lv.1 - Ex. 51 (Simple Rhythmic Dialogue)",
-        tempo: "Moderato",
-        category: "beyer_op101_hand_indep_lvl1",
-        staveLayout: "grand",
-        keySignature: "C",
-        timeSignature: "4/4",
-        repetitions: 1, // Solo 8 battute per ora
-        notesTreble: [ // Mano Destra (MD) - Melodia più varia
-            // Battuta 1
-            { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["a/4"], duration: "q", midiValues: [69] },
-            { keys: ["b/4"], duration: "h", midiValues: [71] },
-            // Battuta 2
-            { keys: ["c/5"], duration: "q", midiValues: [72] }, { keys: ["b/4"], duration: "8", midiValues: [71] }, { keys: ["a/4"], duration: "8", midiValues: [69] },
-            { keys: ["g/4"], duration: "h", midiValues: [67] },
-            // Battuta 3
-            { keys: ["f/4"], duration: "h", midiValues: [65] },
-            { keys: ["a/4"], duration: "q", midiValues: [69] }, { keys: ["g/4"], duration: "q", midiValues: [67] },
-            // Battuta 4
-            { keys: ["e/4"], duration: "q", midiValues: [64] }, { keys: ["r"], duration: "q", isRest: true },
-            { keys: ["d/4"], duration: "h", midiValues: [62] },
-            // Battuta 5
-            { keys: ["c/4"], duration: "q", midiValues: [60] }, { keys: ["d/4"], duration: "q", midiValues: [62] },
-            { keys: ["e/4"], duration: "q", midiValues: [64] }, { keys: ["f/4"], duration: "q", midiValues: [65] },
-            // Battuta 6
-            { keys: ["g/4"], duration: "h", midiValues: [67] }, { keys: ["e/4"], duration: "h", midiValues: [64] },
-            // Battuta 7
-            { keys: ["d/4"], duration: "q", midiValues: [62] }, { keys: ["f/4"], duration: "q", midiValues: [65] },
-            { keys: ["e/4"], duration: "8", midiValues: [64] }, { keys: ["d/4"], duration: "8", midiValues: [62] }, { keys: ["c/4"], duration: "q", midiValues: [60] },
-            // Battuta 8
-            { keys: ["c/4"], duration: "w", midiValues: [60] }
-        ],
-        notesBass: [ // Mano Sinistra (MS) - Pattern più costante (crome)
-            // Battuta 1 (Arpeggio C)
-            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] },
-            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] },
-            // Battuta 2 (Arpeggio G)
-            { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] },
-            { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] },
-            // Battuta 3 (Arpeggio F)
-            { keys: ["f/2"], duration: "8", midiValues: [41] }, { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["a/2"], duration: "8", midiValues: [45] },
-            { keys: ["f/2"], duration: "8", midiValues: [41] }, { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["a/2"], duration: "8", midiValues: [45] },
-            // Battuta 4 (Arpeggio C)
-            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] },
-            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] },
-            // Battuta 5 (Arpeggio Dm)
-            { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["a/3"], duration: "8", midiValues: [57] }, { keys: ["f/3"], duration: "8", midiValues: [53] },
-            { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["a/3"], duration: "8", midiValues: [57] }, { keys: ["f/3"], duration: "8", midiValues: [53] },
-            // Battuta 6 (Arpeggio G)
-            { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] },
-            { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["b/2"], duration: "8", midiValues: [47] },
-            // Battuta 7 (Arpeggio C con variazione)
-            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
-            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
-            // Battuta 8 (Accordo C)
-            { keys: ["c/2", "g/2", "c/3"], duration: "w", midiValues: [36, 43, 48] }
-        ]
-    }
+    id: "beyer-op101-f3-ex51",
+    name: "Hand Independence Lv.1 51: Introduzione Basso Alberti (Do Magg.)",
+    purpose: "Introdurre il pattern del Basso Alberti sulla tonica di Do Maggiore.",
+    category: "beyer_op101_fase3_studi",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1,
+    notesTreble: [
+        { keys: ["e/4"], duration: "h", midiValue: 64 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "h", midiValue: 62 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["b/3"], duration: "h", midiValue: 59 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["e/4"], duration: "h", midiValue: 64 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "w", midiValue: 62 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 },
+        { keys: ["e/4"], duration: "h", midiValue: 64 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["g/4"], duration: "h", midiValue: 67 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "h", midiValue: 62 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["b/3"], duration: "h", midiValue: 59 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["e/4"], duration: "h", midiValue: 64 }, { keys: ["d/4"], duration: "h", midiValue: 62 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["g/3"], duration: "8", midiValues: [55] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["g/3"], duration: "8", midiValues: [55] }
+    ]
+},
+// Ex. 52 (CORRETTO - 'notesTreble' ora usa 'midiValue' per note singole)
+{
+    id: "beyer-op101-f3-ex52",
+    name: "Hand Independence Lv.1 52: Basso Alberti (Do-Sol-Fa-Do)",
+    purpose: "Applicare il Basso Alberti su una progressione armonica I-V-IV-I in Do Magg.",
+    category: "beyer_op101_fase3_studi",
+    staveLayout: "grand",
+    keySignature: "C",
+    timeSignature: "4/4",
+    repetitions: 1,
+    notesTreble: [
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+        { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "h", midiValue: 69 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["d/5"], duration: "h", midiValue: 74 },
+        { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+        { keys: ["f#/4"], duration: "q", midiValue: 66 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["bb/4"], duration: "q", midiValue: 70 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+        { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["bb/4"], duration: "h", midiValue: 70 },
+        { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["f/4"], duration: "h", midiValue: 65 },
+        { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["d/4"], duration: "h", midiValue: 62 },
+        { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["c/4"], duration: "h", midiValue: 60 },
+        { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["e/4"], duration: "h", midiValue: 64 },
+        { keys: ["d/4"], duration: "h", midiValue: 62 }, { keys: ["b/3"], duration: "h", midiValue: 59 },
+        { keys: ["c/4"], duration: "w", midiValue: 60 }
+    ],
+    notesBass: [
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },
+        { keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },
+        { keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },
+        { keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["g/2"], duration: "8", midiValues: [43] },{ keys: ["d/3"], duration: "8", midiValues: [50] },{ keys: ["b/2"], duration: "8", midiValues: [47] },{ keys: ["d/3"], duration: "8", midiValues: [50] },
+        { keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },
+        { keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },
+        { keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },
+        { keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["f/2"], duration: "8", midiValues: [41] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["a/2"], duration: "8", midiValues: [45] },{ keys: ["c/3"], duration: "8", midiValues: [48] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },
+        { keys: ["c/3"], duration: "8", midiValues: [48] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["e/3"], duration: "8", midiValues: [52] },{ keys: ["g/3"], duration: "8", midiValues: [55] },{ keys: ["c/3"], duration: "w", midiValues: [48] }
+    ]
+}
 
 
 
@@ -89,83 +121,7 @@ beyer_op101_hand_independence_lvl1_exercises.push(...hand_independence_ex51);
 // File: beyer_op101_hand_independence_lvl1.js
 // ... (Intestazione e array principale come prima) ...
 
-// =======================================================================================
-// === ESERCIZIO N.52 (INDIPENDENZA: SEMIMINIME VS CROME/PAUSE) ===
-// =======================================================================================
-const hand_independence_ex52 = [
-    {
-        id: "beyer-op101-ex52-handindep-sync",
-        name: "Hand Independence Lv.1 - Ex. 52 (Crotchets vs Eighths/Rests)",
-        tempo: "Andantino",
-        category: "beyer_op101_hand_indep_lvl1",
-        staveLayout: "grand",
-        keySignature: "C",
-        timeSignature: "4/4",
-        repetitions: 1,
-        notesTreble: [ // Mano Destra (MD)
-            // Battute 1-4: MD suona CROME e PAUSE
-            // Battuta 1
-            { keys: ["g/4"], duration: "8", midiValues: [67] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["a/4"], duration: "8", midiValues: [69] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["b/4"], duration: "8", midiValues: [71] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["c/5"], duration: "8", midiValues: [72] }, { keys: ["r"], duration: "8", isRest: true },
-            // Battuta 2
-            { keys: ["b/4"], duration: "q", midiValues: [71] }, { keys: ["g/4"], duration: "8", midiValues: [67] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["a/4"], duration: "h", midiValues: [69] },
-            // Battuta 3
-            { keys: ["f/4"], duration: "8", midiValues: [65] }, { keys: ["g/4"], duration: "8", midiValues: [67] }, { keys: ["a/4"], duration: "q", midiValues: [69] },
-            { keys: ["g/4"], duration: "8", midiValues: [67] }, { keys: ["f/4"], duration: "8", midiValues: [65] }, { keys: ["e/4"], duration: "q", midiValues: [64] },
-            // Battuta 4
-            { keys: ["d/4"], duration: "q", midiValues: [62] }, { keys: ["r"], duration: "8", isRest: true }, { keys: ["c/4"], duration: "8", midiValues: [60] },
-            { keys: ["b/3"], duration: "h", midiValues: [59] },
 
-            // Battute 5-8: MD suona SEMIMINIME (Inversione)
-            // Battuta 5
-            { keys: ["c/4"], duration: "q", midiValues: [60] }, { keys: ["e/4"], duration: "q", midiValues: [64] },
-            { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["c/5"], duration: "q", midiValues: [72] },
-            // Battuta 6
-            { keys: ["b/4"], duration: "q", midiValues: [71] }, { keys: ["a/4"], duration: "q", midiValues: [69] },
-            { keys: ["g/4"], duration: "q", midiValues: [67] }, { keys: ["f/4"], duration: "q", midiValues: [65] },
-            // Battuta 7
-            { keys: ["e/4"], duration: "q", midiValues: [64] }, { keys: ["d/4"], duration: "q", midiValues: [62] },
-            { keys: ["c/4"], duration: "q", midiValues: [60] }, { keys: ["b/3"], duration: "q", midiValues: [59] },
-            // Battuta 8
-            { keys: ["c/4"], duration: "w", midiValues: [60] }
-        ],
-        notesBass: [ // Mano Sinistra (MS)
-            // Battute 1-4: MS suona SEMIMINIME
-            // Battuta 1
-            { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
-            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["g/2"], duration: "q", midiValues: [43] },
-            // Battuta 2
-            { keys: ["f/2"], duration: "q", midiValues: [41] }, { keys: ["f/2"], duration: "q", midiValues: [41] },
-            { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
-            // Battuta 3
-            { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["d/3"], duration: "q", midiValues: [50] },
-            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["g/2"], duration: "q", midiValues: [43] },
-            // Battuta 4
-            { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["e/3"], duration: "q", midiValues: [52] },
-            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
-
-            // Battute 5-8: MS suona CROME e PAUSE (Inversione)
-            // Battuta 5
-            { keys: ["f/2"], duration: "8", midiValues: [41] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["g/2"], duration: "8", midiValues: [43] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["b/2"], duration: "8", midiValues: [47] }, { keys: ["r"], duration: "8", isRest: true },
-            // Battuta 6
-            { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["a/2"], duration: "8", midiValues: [45] }, { keys: ["r"], duration: "8", isRest: true },
-            { keys: ["g/2"], duration: "h", midiValues: [43] },
-            // Battuta 7
-            { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["f/3"], duration: "q", midiValues: [53] },
-            { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
-            // Battuta 8
-            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["r"], duration: "8", isRest: true }, { keys: ["c/2"], duration: "8", midiValues: [36] },
-            { keys: ["c/2"], duration: "h", midiValues: [36] }
-        ]
-    }
-];
-beyer_op101_hand_independence_lvl1_exercises.push(...hand_independence_ex52);
 
 // File: beyer_op101_hand_independence_lvl1.js
 // ... (Intestazione e array principale come prima) ...
@@ -305,7 +261,7 @@ beyer_op101_hand_independence_lvl1_exercises.push(...hand_independence_ex54);
 // ... (Intestazione e array principale come prima) ...
 
 // =======================================================================================
-// === ESERCIZIO N.55 (DIALOGO NUMERICO 5-1 e 5-3) ===
+// === ESERCIZIO N.55 (DIALOGO NUMERICO 5-1 e 5-3) - CORRETTO ===
 // =======================================================================================
 const hand_independence_ex55 = [
     {
@@ -318,100 +274,94 @@ const hand_independence_ex55 = [
         timeSignature: "4/4",
         repetitions: 1, // 16 battute
         notesTreble: [ // Mano Destra (MD)
-            // --- SEZIONE 1 (Battute 1-8): MD "5" o "1/3", MS l'altro ---
-            // Battute 1-2: MD "5", MS "1" (MD fa 5 note, MS una nota lunga o due che incorniciano)
-            // Battuta 1 (MD: 5 semiminime distribuite)
-            { keys: ["g/4"], duration: "q" }, { keys: ["a/4"], duration: "q" }, { keys: ["b/4"], duration: "q" }, { keys: ["c/5"], duration: "q" },
-            // Battuta 2
-            { keys: ["d/5"], duration: "q" }, { keys: ["r"], duration: "q", isRest: true }, { keys: ["c/5"], duration: "h" }, // 5a nota + pausa e risoluzione
-            // Battute 3-4: MD "5", MS "1" (Pattern variato)
+            // --- SEZIONE 1 (Battute 1-8): MD "5" o "3", MS l'altro ---
+            // Battute 1-2: MD "5", MS "1"
+            // Battuta 1 (MD: 4 semiminime)
+            { keys: ["g/4"], duration: "q", midiValue: 67 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["b/4"], duration: "q", midiValue: 71 }, { keys: ["c/5"], duration: "q", midiValue: 72 },
+            // Battuta 2 (MD: 5a nota + risoluzione)
+            { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["r/4"], duration: "q" }, { keys: ["c/5"], duration: "h", midiValue: 72 },
+            // Battute 3-4: MD "5", MS "1"
             // Battuta 3
-            { keys: ["e/5"], duration: "q" }, { keys: ["d/5"], duration: "q" }, { keys: ["c/5"], duration: "q" }, { keys: ["b/4"], duration: "q" },
+            { keys: ["e/5"], duration: "q", midiValue: 76 }, { keys: ["d/5"], duration: "q", midiValue: 74 }, { keys: ["c/5"], duration: "q", midiValue: 72 }, { keys: ["b/4"], duration: "q", midiValue: 71 },
             // Battuta 4
-            { keys: ["a/4"], duration: "q" }, { keys: ["r"], duration: "q", isRest: true }, { keys: ["g/4"], duration: "h" },
-            // Battute 5-6: MD "5", MS "3" (MD fa 5 note, MS 3 note in risposta/contrappunto)
+            { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["r/4"], duration: "q" }, { keys: ["g/4"], duration: "h", midiValue: 67 },
+            // Battute 5-6: MD "5", MS "3" (RITMO CORRETTO: 4 crome + 1 minima)
             // Battuta 5
-            { keys: ["c/5"], duration: "8" }, { keys: ["d/5"], duration: "8" }, { keys: ["e/5"], duration: "8" }, { keys: ["f/5"], duration: "8" }, { keys: ["g/5"], duration: "q" },
-            { keys: ["e/5"], duration: "q" },
+            { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["d/5"], duration: "8", midiValue: 74 }, { keys: ["e/5"], duration: "8", midiValue: 76 }, { keys: ["f/5"], duration: "8", midiValue: 77 }, { keys: ["g/5"], duration: "h", midiValue: 79 },
             // Battuta 6
-            { keys: ["f/5"], duration: "8" }, { keys: ["e/5"], duration: "8" }, { keys: ["d/5"], duration: "8" }, { keys: ["c/5"], duration: "8" }, { keys: ["b/4"], duration: "q" },
-            { keys: ["g/4"], duration: "q" },
-            // Battute 7-8: MD "5", MS "3" (Pattern variato)
+            { keys: ["f/5"], duration: "8", midiValue: 77 }, { keys: ["e/5"], duration: "8", midiValue: 76 }, { keys: ["d/5"], duration: "8", midiValue: 74 }, { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["b/4"], duration: "h", midiValue: 71 },
+            // Battute 7-8: MD "5", MS "3"
             // Battuta 7
-            { keys: ["a/4"], duration: "8" }, { keys: ["b/4"], duration: "8" }, { keys: ["c/5"], duration: "8" }, { keys: ["d/5"], duration: "8" }, { keys: ["e/5"], duration: "q" },
-            { keys: ["g/4"], duration: "q" },
+            { keys: ["a/4"], duration: "8", midiValue: 69 }, { keys: ["b/4"], duration: "8", midiValue: 71 }, { keys: ["c/5"], duration: "8", midiValue: 72 }, { keys: ["d/5"], duration: "8", midiValue: 74 }, { keys: ["e/5"], duration: "h", midiValue: 76 },
             // Battuta 8
-            { keys: ["f/4"], duration: "8" }, { keys: ["e/4"], duration: "8" }, { keys: ["d/4"], duration: "8" }, { keys: ["c/4"], duration: "8" }, { keys: ["b/3"], duration: "q" },
-            { keys: ["c/4"], duration: "q" },
+            { keys: ["f/4"], duration: "8", midiValue: 65 }, { keys: ["e/4"], duration: "8", midiValue: 64 }, { keys: ["d/4"], duration: "8", midiValue: 62 }, { keys: ["c/4"], duration: "8", midiValue: 60 }, { keys: ["b/3"], duration: "h", midiValue: 59 },
 
             // --- SEZIONE 2 (Battute 9-16): INVERSIONE ---
             // Battute 9-10: MD "1", MS "5"
             // Battuta 9 (MD accompagna)
-            { keys: ["c/4", "e/4"], duration: "h" }, { keys: ["g/3", "e/4"], duration: "h" },
+            { keys: ["c/4", "e/4"], duration: "h", midiValues: [60, 64] }, { keys: ["g/3", "e/4"], duration: "h", midiValues: [55, 64] },
             // Battuta 10
-            { keys: ["b/3", "d/4"], duration: "h" }, { keys: ["g/3", "c/4"], duration: "h" },
+            { keys: ["b/3", "d/4"], duration: "h", midiValues: [59, 62] }, { keys: ["g/3", "c/4"], duration: "h", midiValues: [55, 60] },
             // Battute 11-12: MD "1", MS "5"
             // Battuta 11
-            { keys: ["a/3", "f/4"], duration: "h" }, { keys: ["c/4", "f/4"], duration: "h" },
+            { keys: ["a/3", "f/4"], duration: "h", midiValues: [57, 65] }, { keys: ["c/4", "f/4"], duration: "h", midiValues: [60, 65] },
             // Battuta 12
-            { keys: ["b/3", "d/4"], duration: "h" }, { keys: ["g/3", "e/4"], duration: "h" },
+            { keys: ["b/3", "d/4"], duration: "h", midiValues: [59, 62] }, { keys: ["g/3", "e/4"], duration: "h", midiValues: [55, 64] },
             // Battute 13-14: MD "3", MS "5"
             // Battuta 13
-            { keys: ["c/4"], duration: "q" }, { keys: ["e/4"], duration: "q" }, { keys: ["g/4"], duration: "h" },
+            { keys: ["c/4"], duration: "q", midiValue: 60 }, { keys: ["e/4"], duration: "q", midiValue: 64 }, { keys: ["g/4"], duration: "h", midiValue: 67 },
             // Battuta 14
-            { keys: ["f/4"], duration: "q" }, { keys: ["a/4"], duration: "q" }, { keys: ["c/5"], duration: "h" },
+            { keys: ["f/4"], duration: "q", midiValue: 65 }, { keys: ["a/4"], duration: "q", midiValue: 69 }, { keys: ["c/5"], duration: "h", midiValue: 72 },
             // Battute 15-16: MD "3", MS "5" (Cadenza)
             // Battuta 15
-            { keys: ["b/3"], duration: "q" }, { keys: ["d/4"], duration: "q" }, { keys: ["f#/4"], duration: "h" }, // G7
+            { keys: ["b/3"], duration: "q", midiValue: 59 }, { keys: ["d/4"], duration: "q", midiValue: 62 }, { keys: ["f#/4"], duration: "h", midiValue: 66 }, // G7
             // Battuta 16
-            { keys: ["c/4"], duration: "w" }
+            { keys: ["c/4"], duration: "w", midiValue: 60 }
         ],
         notesBass: [ // Mano Sinistra (MS)
-            // --- SEZIONE 1 (Battute 1-8): MD "5" o "1/3", MS l'altro ---
-            // Battute 1-2: MD "5", MS "1" (MS nota lunga o due note che incorniciano)
+            // --- SEZIONE 1 (Battute 1-8): MD "5" o "3", MS l'altro ---
+            // Battute 1-2: MD "5", MS "1"
             // Battuta 1
-            { keys: ["c/3"], duration: "h" }, { keys: ["g/2"], duration: "h" },
+            { keys: ["c/3"], duration: "h", midiValues: [48] }, { keys: ["g/2"], duration: "h", midiValues: [43] },
             // Battuta 2
-            { keys: ["c/3"], duration: "w" },
+            { keys: ["c/3"], duration: "w", midiValues: [48] },
             // Battute 3-4: MD "5", MS "1"
             // Battuta 3
-            { keys: ["f/2"], duration: "h" }, { keys: ["c/3"], duration: "h" },
+            { keys: ["f/2"], duration: "h", midiValues: [41] }, { keys: ["c/3"], duration: "h", midiValues: [48] },
             // Battuta 4
-            { keys: ["g/2"], duration: "w" },
-            // Battute 5-6: MD "5", MS "3" (MS fa 3 note in risposta/contrappunto)
+            { keys: ["g/2"], duration: "w", midiValues: [43] },
+            // Battute 5-6: MD "5", MS "3"
             // Battuta 5
-            { keys: ["c/3"], duration: "q" }, { keys: ["d/3"], duration: "q" }, { keys: ["e/3"], duration: "h" },
+            { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["e/3"], duration: "h", midiValues: [52] },
             // Battuta 6
-            { keys: ["f/3"], duration: "q" }, { keys: ["d/3"], duration: "q" }, { keys: ["b/2"], duration: "h" },
+            { keys: ["f/3"], duration: "q", midiValues: [53] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
             // Battute 7-8: MD "5", MS "3"
             // Battuta 7
-            { keys: ["g/2"], duration: "q" }, { keys: ["a/2"], duration: "q" }, { keys: ["b/2"], duration: "h" },
+            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
             // Battuta 8
-            { keys: ["c/3"], duration: "w" },
+            { keys: ["c/3"], duration: "w", midiValues: [48] },
 
             // --- SEZIONE 2 (Battute 9-16): INVERSIONE ---
             // Battute 9-10: MD "1", MS "5"
-            // Battuta 9 (MS: 5 semiminime distribuite)
-            { keys: ["g/2"], duration: "q" }, { keys: ["a/2"], duration: "q" }, { keys: ["b/2"], duration: "q" }, { keys: ["c/3"], duration: "q" },
+            // Battuta 9
+            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["b/2"], duration: "q", midiValues: [47] }, { keys: ["c/3"], duration: "q", midiValues: [48] },
             // Battuta 10
-            { keys: ["d/3"], duration: "q" }, { keys: ["r"], duration: "q", isRest: true }, { keys: ["c/3"], duration: "h" },
+            { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["r/4"], duration: "q" }, { keys: ["c/3"], duration: "h", midiValues: [48] },
             // Battute 11-12: MD "1", MS "5"
             // Battuta 11
-            { keys: ["e/3"], duration: "q" }, { keys: ["d/3"], duration: "q" }, { keys: ["c/3"], duration: "q" }, { keys: ["b/2"], duration: "q" },
+            { keys: ["e/3"], duration: "q", midiValues: [52] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["c/3"], duration: "q", midiValues: [48] }, { keys: ["b/2"], duration: "q", midiValues: [47] },
             // Battuta 12
-            { keys: ["a/2"], duration: "q" }, { keys: ["r"], duration: "q", isRest: true }, { keys: ["g/2"], duration: "h" },
-            // Battute 13-14: MD "3", MS "5"
-            // Battuta 13 (MS fa 5 note)
-            { keys: ["c/3"], duration: "8" }, { keys: ["d/3"], duration: "8" }, { keys: ["e/3"], duration: "8" }, { keys: ["f/3"], duration: "8" }, { keys: ["g/3"], duration: "q" },
-            { keys: ["e/3"], duration: "q" },
+            { keys: ["a/2"], duration: "q", midiValues: [45] }, { keys: ["r/4"], duration: "q" }, { keys: ["g/2"], duration: "h", midiValues: [43] },
+            // Battute 13-14: MD "3", MS "5" (RITMO CORRETTO: 4 crome + 1 minima)
+            // Battuta 13
+            { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["g/3"], duration: "h", midiValues: [55] },
             // Battuta 14
-            { keys: ["f/3"], duration: "8" }, { keys: ["e/3"], duration: "8" }, { keys: ["d/3"], duration: "8" }, { keys: ["c/3"], duration: "8" }, { keys: ["b/2"], duration: "q" },
-            { keys: ["g/2"], duration: "q" },
+            { keys: ["f/3"], duration: "8", midiValues: [53] }, { keys: ["e/3"], duration: "8", midiValues: [52] }, { keys: ["d/3"], duration: "8", midiValues: [50] }, { keys: ["c/3"], duration: "8", midiValues: [48] }, { keys: ["b/2"], duration: "h", midiValues: [47] },
             // Battute 15-16: MD "3", MS "5" (Cadenza)
             // Battuta 15
-            { keys: ["g/2"], duration: "q" }, { keys: ["b/2"], duration: "q" }, { keys: ["d/3"], duration: "q" }, { keys: ["f/3"], duration: "q" }, // G7
+            { keys: ["g/2"], duration: "q", midiValues: [43] }, { keys: ["b/2"], duration: "q", midiValues: [47] }, { keys: ["d/3"], duration: "q", midiValues: [50] }, { keys: ["f/3"], duration: "q", midiValues: [53] }, // G7
             // Battuta 16
-            { keys: ["c/2"], duration: "w" }
+            { keys: ["c/2"], duration: "w", midiValues: [36] }
         ]
     }
 ];
